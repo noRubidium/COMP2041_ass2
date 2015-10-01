@@ -3,22 +3,22 @@ echo Content-type: text/html
 echo
 
 host_address=`host $REMOTE_ADDR 2>&1|grep Name|sed 's/.*: *//'`
-
+add=$REMOTE_ADDR
+name=`host "$add"`
+name=`echo "$name" |sed 's/.* name pointer//' | sed 's/\.[\s\t]*$//'`
 cat <<eof
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Webserver IP, Host and Software</title>
+<title>IBrowser IP, Host and User Agent</title>
 
 </head>
 <body>
-
-This web server is running on at IP address: <b>$SERVER_ADDR</b>
+Your browser is running at IP address: <b>$add</b>
 <p>
-This web server is running on hostname: <b>$SERVER_NAME</b>
+Your browser is running on hostname: <b>$name</b>
 <p>
-This web server is <b>$SERVER_SOFTWARE</b>
-
+Your browser identifies as: <b>$HTTP_USER_AGENT</b>
 </body>
 </html>
 eof

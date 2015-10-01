@@ -10,7 +10,19 @@ $username = param('username') || '';
 $password = param('password') || '';
 
 if ($username && $password) {
-    print "$username authenticated.\n";
+	if(-d "../accounts/$username"){
+		open F,"<","../accounts/$username/password" or die;
+		$cPassWord = <F>;
+		chomp $cPassWord;
+		if($cPassWord eq $password){
+			print "$username authenticated.\n";
+		}else{
+			print "Incorrect password! \n";
+		}
+	    
+	}else{
+		print " Unknown username! \n";
+	}
 } else {
     print start_form, "\n";
     print "Username:\n", textfield('username'), "\n";
