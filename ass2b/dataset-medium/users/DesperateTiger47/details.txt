@@ -1,0 +1,7 @@
+home_latitude: -33.8139
+password: shadow
+email: G.Hackett@unsw.edu.au
+full_name: Grant Hackett
+home_longitude: 151.1748
+username: DesperateTiger47
+listens: SmartMark SexyNerd92 Vitali86 FunnyJose02 PrettySheryl19 TenderAaron

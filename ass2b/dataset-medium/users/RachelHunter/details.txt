@@ -1,0 +1,7 @@
+listens: SillyErin CreativeRalph PamelaAnderson NerdyGeek
+username: RachelHunter
+home_latitude: -33.8396
+email: R.Hunter@unsw.edu.au
+home_longitude: 151.1964
+password: baseball
+full_name: Rachel Hunter

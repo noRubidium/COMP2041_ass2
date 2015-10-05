@@ -1,0 +1,8 @@
+listens: CreativeRalph CreativeJulianna BrainyBoy SillyErin SillyGenius FunnyNikki SmartMark PamelaAnderson CupcakePiotr09
+email: A.Vega@unsw.edu.au
+full_name: Amelia Vega
+home_longitude: 151.1864
+password: phantom
+home_latitude: -33.8292
+username: CuteAmelia
+home_suburb: Northwood

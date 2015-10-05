@@ -1,0 +1,8 @@
+username: FunnyDaisy
+email: D.Fuentes@unsw.edu.au
+listens: FunnyPatrick31 AwesomeJennifer36 PrettySheryl19
+password: spider
+home_latitude: -33.9163
+home_suburb: Kensington
+home_longitude: 151.2289
+full_name: Daisy Fuentes

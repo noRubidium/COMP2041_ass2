@@ -1,0 +1,6 @@
+full_name: Alexandre Daigle
+home_suburb: Scotland Island
+email: A.Daigle@unsw.edu.au
+listens: SportyAmelia AwesomeJennifer36 DorkyTrista CupcakeAngelina PamelaAnderson
+username: CrazyGeek24
+password: bigdaddy

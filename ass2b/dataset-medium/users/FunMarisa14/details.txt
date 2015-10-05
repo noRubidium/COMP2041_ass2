@@ -1,0 +1,6 @@
+full_name: Marisa Tomei
+listens: SmartMark CupcakeDaisy61 FunnyNikki SillyGenius Susie7 AlexandreDespatie
+password: mark
+username: FunMarisa14
+email: M.Tomei@unsw.edu.au
+home_suburb: Fairfield

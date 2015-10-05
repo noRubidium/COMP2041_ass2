@@ -1,0 +1,8 @@
+password: donald
+full_name: Pedro Pauleta
+email: P.Pauleta@unsw.edu.au
+home_longitude: 151.2558
+listens: CupcakePiotr09 JamesFranco FunnyDaisy SexyNerd92 CupcakeJennifer88 CuteAmelia TenderAaron
+home_suburb: Malabar
+home_latitude: -33.9671
+username: BrainyBoy

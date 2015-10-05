@@ -1,0 +1,8 @@
+full_name: Dominic Monaghan
+home_longitude: 151.1241
+home_suburb: Bexley
+password: diamond
+listens: FunnyPatrick31 Susie7
+home_latitude: -33.9442
+username: Dominic3
+email: D.Monaghan@unsw.edu.au

@@ -1,0 +1,8 @@
+full_name: Aaron Peirsol
+home_suburb: Holroyd
+home_latitude: -33.8287
+home_longitude: 150.9866
+listens: BrainyBoy DesperateTiger47 SmartMark BrainyCatherine
+username: TenderAaron
+password: matt
+email: A.Peirsol@unsw.edu.au

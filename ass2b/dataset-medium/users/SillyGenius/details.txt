@@ -1,0 +1,7 @@
+full_name: Scott Blum
+home_longitude: 151.2155
+listens: SportyAmelia PrettySheryl19 HappyPierce99 CupcakeDaisy61 CuteAmelia CreativeJulianna AwesomeJennifer FunnyPatrick31 FunMarisa14 DorkyTrista Richard899 RachelHunter CupcakeAngelina AlexandreDespatie
+password: apple
+home_latitude: -33.8285
+username: SillyGenius
+email: S.Blum@unsw.edu.au

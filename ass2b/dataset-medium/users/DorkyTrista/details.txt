@@ -1,0 +1,8 @@
+username: DorkyTrista
+home_latitude: -33.7440
+home_suburb: Glendenning
+home_longitude: 150.8639
+password: happy
+full_name: Trista Rehn
+listens: FunnyNikki SillyGenius HotMika CrazyGeek24 CoolAndre NerdyGeek SportyCarmen54 JamesFranco
+email: T.Rehn@unsw.edu.au

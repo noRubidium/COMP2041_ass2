@@ -1,0 +1,8 @@
+home_suburb: Beacon Hill
+home_longitude: 151.2587
+home_latitude: -33.7480
+listens: CreativeJulianna SillyGenius SexyNerd92 CrazyGeek24 Vitali86 CupcakeJennifer88
+password: scooter
+email: A.Jolie@unsw.edu.au
+username: CupcakeAngelina
+full_name: Angelina Jolie

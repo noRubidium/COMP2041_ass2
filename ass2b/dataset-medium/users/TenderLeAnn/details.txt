@@ -1,0 +1,8 @@
+home_longitude: 151.2339
+home_latitude: -33.8939
+listens: HotMika PrettySheryl19 AwesomeJennifer
+password: william
+full_name: LeAnn Rimes
+email: LeA.Rimes@unsw.edu.au
+home_suburb: Centennial Park
+username: TenderLeAnn

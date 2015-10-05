@@ -1,0 +1,8 @@
+password: mickey
+home_latitude: -34.0393
+full_name: Mark Swartz
+listens: CreativeRalph FunnyNikki DesperateTiger47 BrainyCatherine BrainyBoy Vitali86 FunnyJose02 CuteAmelia
+username: SmartMark
+home_longitude: 151.1280
+email: M.Swartz@unsw.edu.au
+home_suburb: Caringbah

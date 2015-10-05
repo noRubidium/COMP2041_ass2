@@ -1,0 +1,8 @@
+full_name: Vitali Klitschko
+home_latitude: -33.9221
+home_longitude: 150.9042
+listens: SportyAmelia SmartMark CupcakeDaisy61 DesperateTiger47 SillyErin BrainyCatherine FunnyJose02 AwesomeJennifer36 CreativeJulianna PamelaAnderson
+email: V.Klitschko@unsw.edu.au
+home_suburb: Lurnea
+username: Vitali86
+password: beer

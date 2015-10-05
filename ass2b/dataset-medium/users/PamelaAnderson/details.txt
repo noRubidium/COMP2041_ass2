@@ -1,0 +1,8 @@
+home_longitude: 151.1459
+home_latitude: -33.9466
+listens: CupcakePiotr09 CupcakeDaisy61 CuteAmelia CreativeJulianna FunnyPatrick31 CrazyGeek24 Vitali86 NerdyGeek FunnyJose02 RachelHunter CupcakeAngelina
+email: P.Anderson@unsw.edu.au
+username: PamelaAnderson
+home_suburb: Rockdale
+full_name: Pamela Anderson
+password: 111111

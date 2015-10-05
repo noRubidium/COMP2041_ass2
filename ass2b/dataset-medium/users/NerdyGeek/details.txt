@@ -1,0 +1,8 @@
+email: M.A.Fleury@unsw.edu.au
+username: NerdyGeek
+full_name: Marc-Andre Fleury
+listens: PrettySheryl19 HappyPierce99 BrainyBoy SillyErin DorkyTrista CupcakeJennifer88 RachelHunter PamelaAnderson
+home_longitude: 151.0223
+password: 2112
+home_latitude: -33.8807
+home_suburb: Berala

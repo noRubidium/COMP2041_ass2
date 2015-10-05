@@ -1,0 +1,7 @@
+email: D.Fuentes@unsw.edu.au
+home_latitude: -33.6472
+username: CupcakeDaisy61
+full_name: Daisy Fuentes
+password: xavier
+listens: CreativeJulianna FunnyDaisy FunMarisa14 SillyGenius HotMika Susie7 CoolAndre Vitali86 CupcakeJennifer88 FunnyJose02 PamelaAnderson BrainyCatherine
+home_longitude: 150.7895

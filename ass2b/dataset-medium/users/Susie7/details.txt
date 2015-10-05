@@ -1,0 +1,8 @@
+listens: SillyGenius CupcakeDaisy61 CreativeJulianna Dominic3 AwesomeJennifer SexyNerd92 FunMarisa14 BrainyCatherine SportyCarmen54 JamesFranco
+email: S.Castillo@unsw.edu.au
+password: newyork
+full_name: Susie Castillo
+username: Susie7
+home_suburb: University Of New South Wales
+home_longitude: 151.2222
+home_latitude: -33.9164

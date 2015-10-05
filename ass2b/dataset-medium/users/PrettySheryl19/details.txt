@@ -1,0 +1,8 @@
+email: S.Crow@unsw.edu.au
+full_name: Sheryl Crow
+username: PrettySheryl19
+listens: CuteJuan SmartMark FunnyNikki DesperateTiger47 HotMika FunMarisa14 TenderLeAnn
+home_longitude: 151.1488
+password: tester
+home_suburb: Turrella
+home_latitude: -33.9284

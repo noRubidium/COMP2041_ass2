@@ -1,0 +1,7 @@
+username: SportyAmelia
+password: topgun
+home_latitude: -33.9176
+listens: CrazyGeek24 HappyPierce99 Richard899 SillyGenius HotMika Susie7 DorkyTrista Vitali86 PamelaAnderson CreativeRalph
+email: A.Vega@unsw.edu.au
+home_longitude: 151.1841
+full_name: Amelia Vega

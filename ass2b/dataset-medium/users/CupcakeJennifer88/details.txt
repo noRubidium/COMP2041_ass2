@@ -1,0 +1,8 @@
+full_name: Jennifer Lopez
+home_latitude: -33.7798
+email: J.Lopez@unsw.edu.au
+listens: BrainyBoy HotMika NerdyGeek CupcakeDaisy61
+username: CupcakeJennifer88
+home_longitude: 151.0823
+password: starwars
+home_suburb: Epping

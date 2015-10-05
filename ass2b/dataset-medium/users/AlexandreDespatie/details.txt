@@ -1,0 +1,8 @@
+full_name: Alexandre Despatie
+home_latitude: -33.8660
+listens: AwesomeJennifer36 CuteJuan BrainyCatherine SillyGenius
+home_suburb: Lilyfield
+email: A.Despatie@unsw.edu.au
+home_longitude: 151.1749
+password: viper
+username: AlexandreDespatie

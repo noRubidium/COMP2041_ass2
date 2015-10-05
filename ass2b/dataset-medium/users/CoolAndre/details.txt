@@ -1,0 +1,8 @@
+email: A.Agassi@unsw.edu.au
+home_suburb: Collaroy Beach
+password: beavis
+listens: DorkyTrista SexyNerd92
+home_latitude: -33.7293
+username: CoolAndre
+full_name: Andre Agassi
+home_longitude: 151.3040

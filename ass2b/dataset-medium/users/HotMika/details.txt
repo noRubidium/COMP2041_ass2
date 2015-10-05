@@ -1,0 +1,8 @@
+home_longitude: 151.1775
+password: zzzzzz
+username: HotMika
+listens: SportyAmelia CupcakeJennifer88 CreativeJulianna CupcakeDaisy61 BrainyCatherine DorkyTrista TenderLeAnn PrettySheryl19 GeekLana
+home_suburb: Erskineville
+home_latitude: -33.9039
+full_name: Mika Hakkinen
+email: M.Hakkinen@unsw.edu.au
