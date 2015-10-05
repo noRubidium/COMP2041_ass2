@@ -1,7 +1,6 @@
 import glob, re
 import os.path
 import datetime
-import datetime
 
 
 ###############################################
@@ -12,11 +11,16 @@ import datetime
 ## for some of the supporting function.      ##
 ###############################################
 
-#This section define some global variables
+# This section define some global variables
 default_str = "Unknown"
 bleat_error = "This bleat unavailable (has been deleted or not wrong reference)."
 user_not_exist = "This user does not exist in the data base!"
-#definition of all types of classes
+
+
+# definition of all types of classes
+
+# location can be used to store location and calculate the distance and many things
+# it's one of the super classes
 class Location(object):
 	def __init__(self,longtitude=default_str,latitude=default_str,suburb=default_str):
 		self.longtitude = longtitude
@@ -24,6 +28,9 @@ class Location(object):
 		self.suburb = suburb
 	def __str__(self):
 		return "<div>\n<div>Longtitude</div><div></div>"
+
+# UserDetail includes the detailed information of the user
+# taking in the file directory including the user's info
 class UserDetail(Location):
 	def __init__(self,user_dir):
 		full_name = "<b>"+default_str+"</b>"
@@ -61,6 +68,16 @@ class UserDetail(Location):
 		else:
 			return user_not_exist
 
+# Picture class can be used to store the user's photo location 
+# and may print the photo in a nicely formated 
+class Picture(object):
+	def __init__(self,picdir):
+		self.pic_path = picdir
+	def __str__(self):
+		pass 
+
+
+# Bleat class can be used to store the bleats
 class Bleat(Location):
 	def __init__(self,dataset_size,bleats_num):
 		bleats_dir = "dataset-" + dataset_size + "/bleats"
@@ -100,11 +117,6 @@ class Bleat(Location):
 		else:
 			return bleat_error
 
-class Picture(object):
-	def __init__(self,picdir):
-		self.pic_path = picdir
-	def __str__(self):
-		pass 
 
 class User(UserDetail,Picture):
 	def __init__(self,dataset_size,userdir):
