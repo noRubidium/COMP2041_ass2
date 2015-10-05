@@ -3,6 +3,15 @@
     <script>
     $(document).ready(function(){
     	$(".list-group-item").css("width","100%");
+        $("#welcome_img").siblings().hide();
+	$("#welcome_img").mouseover(function(){
+		$(this).siblings().show(200);
+		$(this).hide(200);
+	});
+	$("#loginform").mouseleave(function(){
+		$(this).siblings().delay(2000).show(200);
+		$(this).delay(2000).hide(200);
+	});
     });
     </script>
 </body>

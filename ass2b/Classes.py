@@ -43,15 +43,15 @@ class UserDetail(Location):
 			txt = re.split(r'\n',open(user_loc,'r').read())
 			for line in txt:
 				if re.match(r'^\s*username:',line):
-					username = re.sub(r'^\s*username:','',line)
+					username = re.sub(r'^\s*username:\s*','',line)
 				elif re.match(r'^\s*password:',line):
-					password = re.sub(r'^\s*password:','',line)
+					password = re.sub(r'^\s*password:\s*','',line)
 				elif re.match(r'^\s*full_name:',line):
-					full_name = re.sub(r'^\s*full_name:','',line)
+					full_name = re.sub(r'^\s*full_name:\s*','',line)
 				elif re.match(r'^\s*email:',line):
-					email = re.sub(r'^\s*email:','',line)
+					email = re.sub(r'^\s*email:\s*','',line)
 				elif re.match(r'^\s*listens:',line):
-					listen_string = re.sub(r'^\s*listens:','',line)
+					listen_string = re.sub(r'^\s*listens:\s*','',line)
 					listens = re.split(r'\s',listen_string)
 			Location.__init__(self,longtitude,latitude,suburb)
 			self.username = username
@@ -74,7 +74,7 @@ class Picture(object):
 	def __init__(self,picdir):
 		self.pic_path = picdir
 	def __str__(self):
-		pass 
+		return Html.img(self.pic_path).__str__()
 
 
 # Bleat class can be used to store the bleats
@@ -91,18 +91,18 @@ class Bleat(Location):
 			latitude = default_str
 			for line in txt:
 				if re.match(r'^\s*bleat:',line):
-					content = re.sub(r'^\s*bleat:','',line)
+					content = re.sub(r'^\s*bleat:\s*','',line)
 				elif re.match(r'^\s*time:',line):
-					time = re.sub(r'^\s*time:','',line)
+					time = re.sub(r'^\s*time:\s*','',line)
 					time = datetime.datetime(1970,1,1) + datetime.timedelta(0,int(time))
-				elif re.match(r'^\s*username:',line):
+				elif re.match(r'^\s*username:\s*',line):
 					username =  re.sub(r'^\s*username:','',line)
-				elif re.match(r'^\s*longtitude:',line):
+				elif re.match(r'^\s*longtitude:\s*',line):
 					longtitude =  re.sub(r'^\s*longtitude:','',line)
-				elif re.match(r'^\s*latitude:',line):
+				elif re.match(r'^\s*latitude:\s*',line):
 					latitude =  re.sub(r'^\s*latitude:','',line)
 				elif re.match(r'^\s*in_reply_to:',line):
-					in_reply_to =  re.sub(r'^\s*in_reply_to:','',line)
+					in_reply_to =  re.sub(r'^\s*in_reply_to:\s*','',line)
 			Location.__init__(self,longtitude,latitude)
 			self.content = content
 			self.time = time
