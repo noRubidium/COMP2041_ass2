@@ -21,11 +21,15 @@ form = cgi.FieldStorage()
 #start of main function
 print "Content-Type: text/html\n\n"
 print Html.header("user")
-userfiles = fileSearchFunc.find_user(dataset_size,"a")
-for filename in userfiles:
-	user = Classes.User(dataset_size,filename)
-	# print user.print_bleats()
-	bleat = Classes.Bleat(dataset_size,user.bleats[0])
-	print bleat
-	print "<p/>"
+# userfiles = fileSearchFunc.find_user(dataset_size,"a")
+# for filename in userfiles:
+# 	user = Classes.User(dataset_size,filename)
+# 	# print user.print_bleats()
+# 	bleat = Classes.Bleat(dataset_size,user.bleats[0])
+# 	print bleat
+# 	print "<p/>"
+div = Html.div("Hi",{"class":("nav","l")})
+div.delete("class","l")
+div.delete("class","nav")
+print div
 print Html.footer()
