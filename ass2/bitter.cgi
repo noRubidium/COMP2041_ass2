@@ -9,19 +9,6 @@ use CGI::Carp qw(fatalsToBrowser warningsToBrowser);
 use Data::Dumper;  
 use List::Util qw/min max/;
 use POSIX qw(strftime);
-use Class::struct;
-
-struct(user =>{
-    username => '$',
-    full_name => '$',
-    email => '$',
-    listens => '@',
-    home_longtitude => '$',
-    home_altitude =>'$',
-    home_suburb =>'$',
-    password =>'$',
-    bleats =>'@'
-});
 warningsToBrowser(1);
 # print start of HTML ASAP to assist debugging if there is an error in the script
 if(! defined param('username') && ! defined param('password')){

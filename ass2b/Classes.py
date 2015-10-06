@@ -67,6 +67,10 @@ class UserDetail(Location):
 			pass
 		else:
 			return user_not_exist
+	def user_name(self):
+		return self.username
+	def full_name(self):
+		return self.full_name
 
 # Picture class can be used to store the user's photo location 
 # and may print the photo in a nicely formated 
@@ -141,4 +145,5 @@ class User(UserDetail,Picture):
 		return l
 	def get_bleat_count(self):
 		return len(self.bleats)
-
+	def bleat_list(self):
+		return self.bleats

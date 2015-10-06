@@ -13,70 +13,46 @@ dataset_size = "medium"
 
 # cgitb.enable()
 form = cgi.FieldStorage()
-# Required header that tells the browser how to render the text.
-# os.path.isfile(fname) 
-# user_file = fileSearchFunc.find_user_byID(dataset_size,"Vitali86")
-# #print username
-# if user_file == "":
-# 	print open("login.html",'r').read().format("img/You-Shall-Not-Pass.png",
-# 		"hidden","","hidden")
-# 	print open("style.html",'r').read()
-# else:
-# 	print "Userfile",user_file
-# 	user = Classes.User(dataset_size,user_file)
-# 	if not user.password == password:
-# 		print open("login.html",'r').read().format("img/You-Shall-Not-Pass.png",
-# 			"hidden","","hidden")
-# 		print open("style.html",'r').read()
-# 	else:
-# 		print "<p>Login Success!!!</p>"
-# fileSearchFunc.find_user_byID(dataset_size,"DSAF")
 
 #start of main function
+# Required header that tells the browser how to render the text.
 print "Content-Type: text/html\n\n"
 print Html.header("Bitter")
 if 'action' in form.keys():
 	action = form['action'].value
+	print action
 	if action == "Login":
 		if not 'password' in form.keys() or not 'username' in form.keys():
-			print open("login.html",'r').read().format("img/You-Shall-Not-Pass.png",
-				"","hidden","hidden")
-			print open("style.html",'r').read()
+			print Html.login_page_display(True,False,False)
 		else:
 			password = form['password'].value
 			username = form['username'].value
-			user_file = fileSearchFunc.find_user_byID(dataset_size,username)
-			#print username
-			
-			if user_file == "":
-				print open("login.html",'r').read().format("img/You-Shall-Not-Pass.png",
-					"hidden","","hidden")
-				print open("style.html",'r').read()
+
+			if password == "" or username == "":
+				print Html.login_page_display(True,False,False)
 			else:
-				print "userfile",user_file
-				user = Classes.User(dataset_size,user_file)
-				print user.password
-				if not user.password == password:
-					print open("login.html",'r').read().format("img/You-Shall-Not-Pass.png",
-						"hidden","hidden","")
-					print open("style.html",'r').read()
+				user_file = fileSearchFunc.find_user_byID(dataset_size,username)
+				if user_file == "":
+					print Html.login_page_display(False,True,False)
 				else:
-					print "<p>Login Success!!!</p>"
+					# print "userfile",user_file
+					user = Classes.User(dataset_size,user_file)
+					# print user.password
+					if not user.password == password:
+						print Html.login_page_display(False,False,True)
+					else:
+						user_display = Html.user_display(dataset_size,
+							fileSearchFunc.find_user_byID(dataset_size,username))
+						print user_display
+	elif action == "User_name":
+		username = form['username'].value
+		user_file = fileSearchFunc.find_user_byID(dataset_size,username)
+		user_display = Html.user_display(dataset_size,
+			fileSearchFunc.find_user_byID(dataset_size,username))
+		print user_display
 
 else:
-	print open("login.html",'r').read().format("img/You-Shall-Not-Pass.png",
-		"hidden","hidden","hidden")
-	print open("style.html",'r').read()
-# userfiles = fileSearchFunc.find_user(dataset_size,"a")
-# for filename in userfiles:
-# 	user = Html.user_display(dataset_size,filename)
-# 	# # print user.print_bleats()
-# 	# bleat = Classes.Bleat(dataset_size,user.bleats[0])
-# 	print user
-# 	print "<p/>"
-# div = Html.div("Hi",{"class":("nav","l")})
-# div.delete("class","l")
-# div.delete("class","nav")
-# print div
+	# Not yet logged in (for now)
+	print Html.login_page_display(False,False,False)
 
 print Html.footer()

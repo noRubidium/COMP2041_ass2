@@ -67,7 +67,6 @@ class header:
 		txt = open(base + "header.html").read()
 		return txt.format(self.title)
 
-
 class footer:
 	def __init__(self):
 		self.content = open(base + "footer.html").read()
@@ -79,19 +78,37 @@ class user_info(User):
 	def __init__(self,dataset_size,userdir):
 		User.__init__(self,dataset_size,userdir)
 	def __str__(self):
-		return self.pic_path
+		return self.user_info()
 	def user_info(self):
-		return img(self.pic_path).__str__()
-	def listening(self):
-		return img(self.pic_path).__str__()
+		return '''	    <div class="thumbnail">
+	      {0}
+	      <div class="caption">
+		<h3>{1}</h3>
+		<pre>{2}</pre>
+		<p>
+	      </div>
+	    </div>'''.format(img(self.pic_path).__str__(),,)
+
 
 class listening(User):
 	def __init__(self,dataset_size,userdir):
-		listening = User(dataset_size,userdir).listens
+		self.listening = User(dataset_size,userdir).listens
 	def __str__(self):
 		return self.pic_path
-
-
+	def print_listening(self):
+		string='''<div class="list-group">
+	  				<div class="list-group-item active">
+	  					Listening
+	  				</div>
+				'''
+		for listen in self.listening:
+			string +='''<form action="" method="post" class="list-group-item user-listen">
+				<input type="hidden" name="username" value="{0}">
+				<button value="User_name" name="action" class="list-group-item">{0}</button>
+			</form>
+			'''.format(listen)
+		string += "\n</div>"
+		return string
 class bleats(Bleat):
 	def __init__(self,dataset_size,num_list=list()):
 		self.list = list()
@@ -99,13 +116,27 @@ class bleats(Bleat):
 	def print_bleats(self):
 		return "bleats"
 
-class user_display(user_info,bleats):
+class user_display(user_info,bleats,listening):
 	def __init__(self,dataset_size,userdir):
 		user_info.__init__(self,dataset_size,userdir)
-		num_list=list()
+		num_list=self.bleat_list()
 		bleats.__init__(self,dataset_size,num_list)
+		listening.__init__(self,dataset_size,userdir)
 	def __str__(self):
 		txt = open(base + "user_display.html").read()
 		return txt.format(self.user_info(),
-			self.listening(),self.print_bleats())
+			self.print_listening(),self.print_bleats())
 
+def login_page_display(empty=False,exist=False,wrong=False):
+	em="hidden"
+	ex="hidden"
+	wr="hidden"
+	if empty:
+		em=""
+	elif exist:
+		ex=""
+	elif wrong:
+		wr=""
+	string = open(base + "login.html",'r').read().format("img/You-Shall-Not-Pass.png",
+				em,ex,wr)
+	return string + open(base+"style.html",'r').read()
