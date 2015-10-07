@@ -162,17 +162,14 @@ class Bleat(Location):
 		return '''
 		<div class="list-group">
 			<div class="list-group-item container">
-				<div class="col-sm-8">{0}</div>
-				<div class="col-sm-4" align="right">
+				<div class="col-sm-12">{2}</div>
+				<div class="col-sm-1">{0}</div>
+				<div class="col-sm-1" align="right">
 					{1}
 				</div>
-			</div>
-			<div class="list-group-item container">
-			{2}
-			</div>
-			<div class="list-group-item container">
-				<div class="col-sm-6">{3}</div>
-				<div class="col-sm-6" align="right"><small>{4}</small></div>
+				<div class="col-sm-4">{3}</div>
+				<div class="col-sm-6" align="right"><h6><small>{4}</small></h6></div>
+
 			</div>
 		</div>
 		<div class="list-group">

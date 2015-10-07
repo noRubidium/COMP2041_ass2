@@ -81,22 +81,27 @@ class user_info(User):
 		return self.user_info()
 	def user_info(self):
 		return '''
-		<div class="thumbnail">
-	    	{0}
-	    	<div class="caption">
-				<h3>{1}</h3>
-				<div class="row">
-					<div class="col-xs-4">
-						<strong>Full name:</strong>
-					</div>
-					<div class="col-xs-8">
-						{3}
-					</div>
-				</div>
-				{2}
-				<p>
+		<div class="list-group">
+			<div class="list-group-item active">
+				User Information
 			</div>
-	    </div>'''.format(img(self.pic_path).__str__(),
+			<div class="thumbnail">
+		    	{0}
+		    	<div class="caption">
+					<h3>{1}</h3>
+					<div class="row">
+						<div class="col-xs-4">
+							<strong>Full name:</strong>
+						</div>
+						<div class="col-xs-8">
+							{3}
+						</div>
+					</div>
+					{2}
+					<p>
+				</div>
+		    </div>
+		</div>'''.format(img(self.pic_path).__str__(),
 	    	self.username,self.print_loc(),self.full_name)
 
 
@@ -114,7 +119,8 @@ class listening(User):
 		for listen in self.listening:
 			string +='''<form action="" method="post" class="list-group-item user-listen">
 				<input type="hidden" name="username" value="{0}">
-				<button value="User_name" name="action" class="list-group-item" style="border:0px">{0}</button>
+				<span class="glyphicon glyphicon-user"></span>
+				<button value="User_name" name="action" class="" style="border:0px">{0}</button>
 			</form>
 			'''.format(listen)
 		string += "\n</div>"
@@ -157,3 +163,13 @@ def login_page_display(empty=False,exist=False,wrong=False):
 	string = open(base + "login.html",'r').read().format("img/You-Shall-Not-Pass.png",
 				em,ex,wr)
 	return string + open(base+"style.html",'r').read()
+
+def nav_bar_display(username):
+	string = open(base+"navbar.html",'r').read()
+	return string.format(my_account_menu(username,0))
+
+def my_account_menu(username,password):
+	return '''<li><a href="#">Dashboard</a></li>
+            <li><a href="#">Logout</a></li>'''.format(username,password)
+      
+	

@@ -1,7 +1,13 @@
 <style>
 @keyframes display {
-    0%   {display:none;}
-    100% {display:block;}
+    0%   {
+    	background-color:rgba(0,0,0,0);
+    	color:rgba(255,255,255,0);
+    }
+    100% {
+    	background-color:rgba(0,0,0,0.8);
+    	color:rgba(255,255,255,1);
+    }
  }
 
 .menu-mark ul{
@@ -14,12 +20,11 @@
 	float:left;
 	width:100px;
 	animation-name: display;
-	animation-duration: 4s;
-	border: 2px solid #ddd;
+	animation-duration: 0.5s;
 	font-family: Lato, Geneva, sans-serif;
 	background-color:rgba(0,0,0,0.8);
 	color:#fff;
-	border-radius:5px;	
+	padding:5px;
 }
 body{
     font-family: Verdana, Geneva, sans-serif;
@@ -28,9 +33,13 @@ body{
 	padding-top:20px;
 	max-height: 700px;
 	overflow: auto;
-	background-color:rgba(100,155,155,0.4)
+	background-color:rgba(150,205,205,0.6);
+	border-radius:0 0 5px 5px;
 }
 .menu-item {
 	over-flow:none;
+}
+.menu-mark {
+	height:15px;
 }
 </style>
