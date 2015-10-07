@@ -22,19 +22,45 @@ user_not_exist = "This user does not exist in the data base!"
 # location can be used to store location and calculate the distance and many things
 # it's one of the super classes
 class Location(object):
-	def __init__(self,longtitude=default_str,latitude=default_str,suburb=default_str):
-		self.longtitude = longtitude
+	def __init__(self,longitude=default_str,latitude=default_str,suburb=default_str):
+		self.longitude = longitude
 		self.latitude = latitude
 		self.suburb = suburb
 	def __str__(self):
-		return "<div>\n<div>Longtitude</div><div></div>"
+		return self.print_loc_row()
+	def print_loc_row(self):
+		return '''<span class="glyphicon glyphicon-map-marker location-mark menu-mark">
+		<div class="panel">
+			<ul class="list-unstyled">
+				<li><strong>Longitude:</strong> {0}</li>
+				<li><strong>Latitude:</strong> {1}</li>
+			</ul>
+		</div>
+		</span>'''.format(self.longitude,self.latitude)
+	def get_long(self):
+		return '''<div class="row">
+			<div class="col-xs-4"><strong>longitude</strong></div>
+			<div class="col-xs-8">{0}</div>
+			</div>'''.format(self.longitude)
+	def get_lat(self):
+		return '''<div class="row">
+			<div class="col-xs-4"><strong>Latitude</strong></div>
+			<div class="col-xs-8">{0}</div>
+			</div>'''.format(self.latitude)
+	def get_sub(self):
+		return '''<div class="row">
+			<div class="col-xs-4"><strong>Suburb</strong></div>
+			<div class="col-xs-8">{0}</div>
+			</div>'''.format(self.suburb)
+	def print_loc(self):
+		return self.get_long()+self.get_lat() +self.get_sub()
 
 # UserDetail includes the detailed information of the user
 # taking in the file directory including the user's info
 class UserDetail(Location):
 	def __init__(self,user_dir):
 		full_name = "<b>"+default_str+"</b>"
-		longtitude = default_str
+		longitude = default_str
 		latitude = default_str
 		suburb = default_str
 		listens = list()
@@ -53,7 +79,13 @@ class UserDetail(Location):
 				elif re.match(r'^\s*listens:',line):
 					listen_string = re.sub(r'^\s*listens:\s*','',line)
 					listens = re.split(r'\s',listen_string)
-			Location.__init__(self,longtitude,latitude,suburb)
+				elif re.match(r'^\s*home_longitude:',line):
+					longitude = re.sub(r'^\s*home_longitude:\s*','',line)
+				elif re.match(r'^\s*home_latitude:',line):
+					latitude = re.sub(r'^\s*home_latitude:\s*','',line)
+				elif re.match(r'^\s*home_suburb:',line):
+					suburb = re.sub(r'^\s*home_suburb:\s*','',line)
+			Location.__init__(self,longitude,latitude,suburb)
 			self.username = username
 			self.password = password
 			self.full_name = full_name
@@ -91,7 +123,7 @@ class Bleat(Location):
 			txt = re.split(r'\n',bleat_file.read())
 			# Set default value to some variables
 			in_reply_to = ""			
-			longtitude = default_str
+			longitude = default_str
 			latitude = default_str
 			for line in txt:
 				if re.match(r'^\s*bleat:',line):
@@ -101,19 +133,51 @@ class Bleat(Location):
 					time = datetime.datetime(1970,1,1) + datetime.timedelta(0,int(time))
 				elif re.match(r'^\s*username:\s*',line):
 					username =  re.sub(r'^\s*username:','',line)
-				elif re.match(r'^\s*longtitude:\s*',line):
-					longtitude =  re.sub(r'^\s*longtitude:','',line)
+				elif re.match(r'^\s*longitude:\s*',line):
+					longitude =  re.sub(r'^\s*longitude:','',line)
 				elif re.match(r'^\s*latitude:\s*',line):
 					latitude =  re.sub(r'^\s*latitude:','',line)
 				elif re.match(r'^\s*in_reply_to:',line):
 					in_reply_to =  re.sub(r'^\s*in_reply_to:\s*','',line)
-			Location.__init__(self,longtitude,latitude)
+			Location.__init__(self,longitude,latitude)
 			self.content = content
 			self.time = time
 			self.author = username
+			self.in_reply_to = in_reply_to
 			self.exist = True
 		else:
 			self.exist = False
+	def print_reply(self):
+		if self.in_reply_to == "":
+			return ""
+		else:
+			return '''<span class="glyphicon glyphicon-new-window menu-mark in_reply_to-mark">
+						<div class="text-left">
+							<ul class="list-unstyled">
+								<li><strong>In reply to:</strong> {0}</li>
+							</ul>
+						</div>
+					</span>'''.format(self.in_reply_to)
+	def format_bleat(self):
+		return '''
+		<div class="list-group">
+			<div class="list-group-item container">
+				<div class="col-sm-8">{0}</div>
+				<div class="col-sm-4" align="right">
+					{1}
+				</div>
+			</div>
+			<div class="list-group-item container">
+			{2}
+			</div>
+			<div class="list-group-item container">
+				<div class="col-sm-6">{3}</div>
+				<div class="col-sm-6" align="right"><small>{4}</small></div>
+			</div>
+		</div>
+		<div class="list-group">
+		</div>
+		'''.format(self.print_loc_row(),self.print_reply(),self.content,self.author,self.time)
 	def __str__(self):
 		#these returns need formating
 		if self.exist:

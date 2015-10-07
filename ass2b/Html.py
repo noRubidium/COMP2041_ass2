@@ -80,14 +80,24 @@ class user_info(User):
 	def __str__(self):
 		return self.user_info()
 	def user_info(self):
-		return '''	    <div class="thumbnail">
-	      {0}
-	      <div class="caption">
-		<h3>{1}</h3>
-		<pre>{2}</pre>
-		<p>
-	      </div>
-	    </div>'''.format(img(self.pic_path).__str__(),,)
+		return '''
+		<div class="thumbnail">
+	    	{0}
+	    	<div class="caption">
+				<h3>{1}</h3>
+				<div class="row">
+					<div class="col-xs-4">
+						<strong>Full name:</strong>
+					</div>
+					<div class="col-xs-8">
+						{3}
+					</div>
+				</div>
+				{2}
+				<p>
+			</div>
+	    </div>'''.format(img(self.pic_path).__str__(),
+	    	self.username,self.print_loc(),self.full_name)
 
 
 class listening(User):
@@ -104,7 +114,7 @@ class listening(User):
 		for listen in self.listening:
 			string +='''<form action="" method="post" class="list-group-item user-listen">
 				<input type="hidden" name="username" value="{0}">
-				<button value="User_name" name="action" class="list-group-item">{0}</button>
+				<button value="User_name" name="action" class="list-group-item" style="border:0px">{0}</button>
 			</form>
 			'''.format(listen)
 		string += "\n</div>"
@@ -114,7 +124,14 @@ class bleats(Bleat):
 		self.list = list()
 		self.list = [Bleat(dataset_size,n) for n in num_list]
 	def print_bleats(self):
-		return "bleats"
+		string='''<div class="list-group">
+	  				<div class="list-group-item active">
+	  					Bleats
+	  				</div>
+	  				<div class="bleat-group">'''
+		for bleat in self.list:
+			string += bleat.format_bleat()
+		return string+"</div>\n</div>"
 
 class user_display(user_info,bleats,listening):
 	def __init__(self,dataset_size,userdir):
@@ -125,7 +142,7 @@ class user_display(user_info,bleats,listening):
 	def __str__(self):
 		txt = open(base + "user_display.html").read()
 		return txt.format(self.user_info(),
-			self.print_listening(),self.print_bleats())
+			self.print_listening(),self.print_bleats())+open(base + "style_bleat.html").read()
 
 def login_page_display(empty=False,exist=False,wrong=False):
 	em="hidden"

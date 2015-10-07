@@ -50,7 +50,8 @@ if 'action' in form.keys():
 		user_display = Html.user_display(dataset_size,
 			fileSearchFunc.find_user_byID(dataset_size,username))
 		print user_display
-
+	elif action == "search_user":
+		pass
 else:
 	# Not yet logged in (for now)
 	print Html.login_page_display(False,False,False)
