@@ -1,7 +1,0 @@
-email: J.Canseco@unsw.edu.au
-home_longitude: 151.2650
-full_name: Jose Canseco
-listens: SportyAmelia DesperateTiger47 CreativeRalph PamelaAnderson CuteJuan
-home_latitude: -33.8888
-password: surfer
-username: FunnyJose02

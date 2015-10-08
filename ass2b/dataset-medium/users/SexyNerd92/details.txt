@@ -1,8 +1,0 @@
-home_longitude: 151.1489
-password: danielle
-listens: CreativeRalph BrainyBoy CupcakeAngelina DesperateTiger47 SillyGenius HotMika CrazyGeek24 AwesomeJennifer36 AlexandreDespatie JamesFranco HappyPierce99
-email: A.Peirsol@unsw.edu.au
-full_name: Aaron Peirsol
-home_suburb: East Ryde
-home_latitude: -33.8051
-username: SexyNerd92

@@ -1,8 +1,0 @@
-home_suburb: Lakemba
-password: taylor
-email: L.Clarkson@unsw.edu.au
-full_name: Lana Clarkson
-home_latitude: -33.9239
-home_longitude: 151.0838
-listens: HotMika CuteJuan JamesFranco CupcakePiotr09 AwesomeJennifer
-username: GeekLana

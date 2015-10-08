@@ -1,8 +1,0 @@
-listens: HappyPierce99 FunnyDaisy Richard899 Dominic3 SillyGenius CrazyGeek24 PamelaAnderson JamesFranco TenderAaron CupcakePiotr09
-home_suburb: Balmain
-username: FunnyPatrick31
-password: white
-full_name: Patrick Bourrat
-email: P.Bourrat@unsw.edu.au
-home_latitude: -33.8630
-home_longitude: 151.1683

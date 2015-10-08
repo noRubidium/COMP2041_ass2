@@ -1,8 +1,0 @@
-email: C.Electra@unsw.edu.au
-home_suburb: Arncliffe
-home_longitude: 151.1506
-full_name: Carmen Electra
-listens: Susie7 DorkyTrista Richard899 CreativeJulianna
-password: 2000
-username: SportyCarmen54
-home_latitude: -33.9454

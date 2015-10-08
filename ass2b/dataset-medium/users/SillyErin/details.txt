@@ -1,8 +1,0 @@
-password: kelly
-full_name: Erin Brockovich
-home_longitude: 150.7768
-username: SillyErin
-home_latitude: -33.7199
-listens: RachelHunter CuteAmelia
-home_suburb: Shanes Park
-email: E.Brockovich@unsw.edu.au

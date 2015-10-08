@@ -1,8 +1,0 @@
-full_name: Richard Virenque
-password: aaaa
-home_latitude: -33.8346
-email: R.Virenque@unsw.edu.au
-listens: SportyAmelia DesperateTiger47 Dominic3 SillyGenius BrainyCatherine FunnyPatrick31 SportyCarmen54 GeekLana
-username: Richard899
-home_longitude: 151.1610
-home_suburb: Riverview

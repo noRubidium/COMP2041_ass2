@@ -1,8 +1,0 @@
-home_latitude: -33.9324
-username: CupcakePiotr09
-listens: HappyPierce99 CreativeJulianna FunnyPatrick31 GeekLana CupcakeJennifer88 JamesFranco PamelaAnderson
-password: james
-home_suburb: Bardwell Park
-full_name: Piotr Anderszewski
-email: P.Anderszewski@unsw.edu.au
-home_longitude: 151.1265

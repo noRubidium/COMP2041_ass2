@@ -1,8 +1,0 @@
-listens: CreativeRalph CupcakeDaisy61 CupcakeAngelina FunnyDaisy SillyGenius BrainyCatherine HotMika Susie7 Vitali86 SportyCarmen54 CuteAmelia PamelaAnderson CupcakePiotr09
-full_name: Julianna Margulies
-home_latitude: -33.7671
-username: CreativeJulianna
-password: sexsex
-home_longitude: 150.8646
-home_suburb: Doonside
-email: J.Margulies@unsw.edu.au

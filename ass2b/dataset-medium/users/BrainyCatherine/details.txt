@@ -1,8 +1,0 @@
-username: BrainyCatherine
-home_longitude: 151.2660
-listens: CupcakeDaisy61 FunnyNikki AlexandreDespatie Richard899 HotMika Susie7 Vitali86 JamesFranco CreativeJulianna TenderAaron
-home_latitude: -33.8910
-email: C.Z.Jones@unsw.edu.au
-password: qwerty
-full_name: Catherine Zeta-Jones
-home_suburb: Tamarama

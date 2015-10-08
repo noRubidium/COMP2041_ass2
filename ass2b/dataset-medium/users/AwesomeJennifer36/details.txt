@@ -1,8 +1,0 @@
-home_longitude: 151.1403
-full_name: Jennifer Lopez
-listens: Dominic3 FunnyDaisy SexyNerd92 FunnyPatrick31 CrazyGeek24 CoolAndre Vitali86 AlexandreDespatie
-home_latitude: -33.8580
-email: J.Lopez@unsw.edu.au
-username: AwesomeJennifer36
-password: bill
-home_suburb: Chiswick

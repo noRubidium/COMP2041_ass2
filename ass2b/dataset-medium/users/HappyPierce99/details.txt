@@ -1,8 +1,0 @@
-home_latitude: -33.9350
-full_name: Pierce Brosnan
-home_longitude: 151.2214
-password: naughty
-username: HappyPierce99
-home_suburb: Daceyville
-email: P.Brosnan@unsw.edu.au
-listens: SportyAmelia CupcakePiotr09 CuteJuan SillyGenius SexyNerd92 FunnyPatrick31 NerdyGeek

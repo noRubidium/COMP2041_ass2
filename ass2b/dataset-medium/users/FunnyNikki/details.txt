@@ -1,8 +1,0 @@
-full_name: Nikki Reed
-home_suburb: Middle Cove
-home_longitude: 151.2081
-username: FunnyNikki
-email: N.Reed@unsw.edu.au
-password: alexis
-listens: DorkyTrista SmartMark
-home_latitude: -33.7952

@@ -1,8 +1,0 @@
-home_longitude: 151.1263
-email: R.Firman@unsw.edu.au
-username: CreativeRalph
-home_latitude: -33.8866
-password: enjoy
-listens: SportyAmelia SmartMark CreativeJulianna CuteAmelia SexyNerd92 CupcakeJennifer88 RachelHunter JamesFranco
-home_suburb: Ashfield
-full_name: Ralph Firman

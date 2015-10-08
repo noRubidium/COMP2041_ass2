@@ -1,8 +1,0 @@
-username: JamesFranco
-home_suburb: Hunters Hill
-listens: CreativeRalph CreativeJulianna BrainyBoy AwesomeJennifer SexyNerd92 FunnyPatrick31 Susie7 DorkyTrista BrainyCatherine FunnyJose02 CupcakePiotr09
-password: maddog
-home_latitude: -33.8195
-email: J.Franco@unsw.edu.au
-home_longitude: 151.1401
-full_name: James Franco
