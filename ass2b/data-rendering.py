@@ -92,6 +92,7 @@ for bleat_dir in glob.glob("dataset-large/bleats/*"):
 		line = re.sub("€","&euro;",line)
 		line = re.sub("©","&copy;",line)
 		line = re.sub("®","&reg;",line)
+		line = re.sub(":","&col")
 		if re.match(r'^\s*bleat:',line):
 			content = re.sub(r'^\s*bleat:\s*','',line)
 		elif re.match(r'^\s*time:',line):

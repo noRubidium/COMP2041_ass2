@@ -76,11 +76,11 @@ class Location(object):
 	def print_loc_row(self):
 		return open(base+"loc_row.html").read().format(self.longitude,self.latitude)
 	def get_long(self):
-		return open(base+"loc_long.html").read().format(self.longitude)
+		return open(base+"loc_long.html").read().format(self.longitude,"Longitude: ")
 	def get_lat(self):
-		return open(base+"loc_long.html").read().format(self.latitude)
+		return open(base+"loc_long.html").read().format(self.latitude,"Latitude: ")
 	def get_sub(self):
-		return open(base+"loc_long.html").read().format(self.suburb)
+		return open(base+"loc_long.html").read().format(self.suburb,"Suburb: ")
 	def print_loc(self):
 		return self.get_long()+self.get_lat() +self.get_sub()
 
@@ -105,7 +105,11 @@ class Bleat(Location):
 			self.author = username
 			self.in_reply_to = in_reply_to
 			self.exist = is_exist
-
+	def format_content(self):
+		result = self.content
+		result = re.sub(r'@([^\s\@]*)',
+			r'<div style="position:inline-block"><form action="bitter.cgi" method="post" class="form-inline"><input type="hidden" name="username" value="\1"><button value="User_name" name="action" class="" style="border:0px">@\1</button></form></div>',result)
+		return result
 	def print_reply(self):
 		if self.in_reply_to == "":
 			return ""
@@ -113,7 +117,7 @@ class Bleat(Location):
 			return open(base+"reply_dropdown.html").read().format(self.in_reply_to)
 	def format_bleat(self):
 		return open(base+"single_bleat.html").read().format(self.print_loc_row(),
-		self.print_reply(),self.content,self.author,self.time)
+		self.print_reply(),self.format_content(),self.author,self.time)
 	def __str__(self):
 		#these returns need formating
 		if self.exist:
@@ -123,9 +127,9 @@ class Bleat(Location):
 
 
 class User(Location,Picture):
-	def __init__(self,UID = default_str, username = default_str, full_name = default_str, 
+	def __init__(self,UID = "null", username = default_str, full_name = default_str, 
 	email = default_str, listens = default_str, password = default_str, longitude = default_str, 
-	latitude = default_str, suburb = default_str,pic_dir = default_str,bleats = default_str,is_exist=True):
+	latitude = default_str, suburb = default_str,pic_dir = default_str,bleats = default_str,status=default_str,is_exist=True):
 		if is_exist:
 			self.UID = UID
 			self.username = username
@@ -134,8 +138,11 @@ class User(Location,Picture):
 			self.listens = [var for var in re.split(r' ',listens) if var]
 			self.password = password
 			Location.__init__(self,longitude,latitude,suburb)
+			if pic_dir == "":
+				pic_dir="img/default.jpg"
 			Picture.__init__(self,pic_dir)
 			self.exist = is_exist
+			self.status = status
 			self.bleats = [var for var in re.split(r',',bleats) if var]
 		else:
 			self.exist = is_exist
@@ -152,7 +159,21 @@ class User(Location,Picture):
 		return len(self.bleats)
 	def bleat_list(self):
 		return self.bleats
-	
+	def add_bleats(self,bleat_No):
+		self.bleats.append(bleat_No)
+	def add_listens(self,username):
+		self.listens.append(username)
+	def update(self):
+		conn=sqlite3.connect("database/User.db")
+		c = conn.cursor()
+		bleats = ",".join(self.bleats)
+		listens = " ".join(self.listens)
+		operation = "INSERT OR REPLACE INTO users VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
+		values=(self.UID,self.username,self.full_name,self.email,listens,self.password,
+			self.longitude,self.latitude,self.suburb,self.pic_path,bleats,self.status)
+		c.execute(operation,values)
+		conn.commit()
+		conn.close()
 	def user_info(self):
 		return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),
 	    	self.username,self.print_loc(),self.full_name)
@@ -165,9 +186,13 @@ class User(Location,Picture):
 	
 	def print_bleats(self):
 		string=""
+		def getKey(custom):
+			return custom.time
+		bleat_list=list()
 		for bleat in self.bleats:
 			import Search
-			bleat = Search.search_bleat_by_bleat_ID(bleat)
+			bleat_list.append(Search.search_bleat_by_bleat_ID(bleat))
+		for bleat in sorted(bleat_list,key=getKey,reverse=True):
 			string += bleat.format_bleat()
 		return open(base+"bleat_panel.html").read().format(string)
 	def user_display(self):
@@ -209,7 +234,7 @@ def nav_bar_display(username):
 
 def my_account_menu(username,password):
 	return '''<li><a href="#">Dashboard</a></li>
-            <li><a href="#">Logout</a></li>'''.format(username,password)
+            <li><a href="Logout.cgi" action="Logout">Logout</a></li>'''.format(username,password)
       
 
 	

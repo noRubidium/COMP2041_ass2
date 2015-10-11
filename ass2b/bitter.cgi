@@ -6,7 +6,7 @@ import Cookie,random,time, datetime
 import sys, string, os, calendar, traceback
 #import own library
 import Search,Html
-
+import login_validate
 try:
 	#debugging and log writing statement starts
 	d = datetime.datetime.now()
@@ -20,8 +20,6 @@ try:
 	log.write("     Process started at " 
 	   + str(starttime) + "\n")
 	log.write("\n")
-
-	dataset_size = "large"
 
 	cgitb.enable(display=0, logdir="/logdir")
 	form = cgi.FieldStorage()
@@ -41,7 +39,7 @@ try:
 	    cookie["logged_in"]["max-age"] = 50
 	log.write("COOKIE_TIME:"+str(cookie["logged_in"]["expires"]))
 	print_string =  print_string + Html.header("Bitter").__str__()
-	if  cookie["logged_in"].value == '0' :
+	if not login_validate.validate(cookie["logged_in"].value):
 		if 'action' in form.keys():
 			action = form['action'].value
 			print_string += action
@@ -78,8 +76,6 @@ try:
 				user = Search.search_user_by_ID_e(username)
 				print_string = print_string + Html.nav_bar_display(username)
 				print_string = print_string + user.user_display()
-			elif action == "search_user":
-				pass
 			elif action == "main":
 				username = cookie["username"].value
 				user = Search.search_user_by_ID_e(username)
@@ -93,10 +89,9 @@ try:
 		else:
 			if "username" in cookie.keys():
 				username = cookie["username"].value
-				print_string = print_string + Html.nav_bar_display(username);
-				user_display = Html.user_display(dataset_size,
-					fileSearchFunc.find_user_byID(dataset_size,username))
-				print_string = print_string + user_display.__str__()
+				user = Search.search_user_by_ID_e(username)
+				print_string = print_string + Html.nav_bar_display(username)
+				print_string = print_string + user.user_display()
 			else:
 				print_string = print_string + Html.login_page_display(False,False,False)
 	print_string = cookie.output() +"\n\n"+ print_string + Html.footer().__str__()

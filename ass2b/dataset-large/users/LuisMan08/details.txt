@@ -1,8 +1,0 @@
-home_latitude: -33.8089
-email: L.Horna@unsw.edu.au
-full_name: Luis Horna
-home_longitude: 151.2043
-home_suburb: Northbridge
-password: jack
-username: LuisMan08
-listens: CrazyTiger Jen4
