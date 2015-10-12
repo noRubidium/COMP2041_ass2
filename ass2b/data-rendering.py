@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-15 -*-
 import re,os,glob,sqlite3
 import shutil
-
+import special_char_filter
 conn = sqlite3.connect('database/User.db')
 c = conn.cursor()
 default_str = ""
@@ -11,7 +11,7 @@ try:
 		(userID INTEGER PRIMARY KEY, username TEXT,
 			full_name TEXT, email TEXT,listens TEXT,
 			password TEXT, home_longitude REAL, home_latitude REAL, 
-			home_suburb REAL, picture_dir TEXT,bleats TEXT);''')
+			home_suburb REAL, picture_dir TEXT,bleats TEXT,status TEXT);''')
 
 	print glob.glob("dataset-large/users/*")
 	UID = 0
@@ -28,6 +28,7 @@ try:
 		username = default_str
 		email= default_str
 		password = default_str
+		status = default_str
 		if os.path.isfile(user_dir+"/profile.jpg"):
 			picture_dir ='user_img/'+str(UID)+"_profile.jpg"
 			shutil.copy2(user_dir+"/profile.jpg", picture_dir)
@@ -54,9 +55,9 @@ try:
 				home_suburb = re.sub(r'^\s*home_suburb:\s*','',line)
 		txt = open(bleats_filename,'r').read()
 		txt = re.sub(r'\n',',',txt)
-		operation = '''INSERT INTO users values(\'{9}\',\'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\',\'{5}\',\'{6}\',\'{7}\',\'{8}\',\'{10}\');'''.format(username,full_name,email,listens,password,home_longitude,home_latitude,home_suburb,picture_dir,UID,txt)
-		print operation
-		c.execute(operation)
+		sets = (UID,username,full_name,email,listens,password,home_longitude,home_latitude,home_suburb,picture_dir,txt,status)
+		operation = '''INSERT INTO users values(?,?,?,?,?,?,?,?,?,?,?,?);'''
+		c.execute(operation,sets)
 		UID += 1
 	conn.commit()
 	conn.close()
@@ -70,7 +71,7 @@ try:
 	c.execute('''CREATE TABLE bleats
 		(bleatID INTEGER PRIMARY KEY, username TEXT,
 			bleat TEXT,in_reply_to TEXT,time TEXT,
-			 longitude REAL, latitude REAL);''')
+			 longitude REAL, latitude REAL,mentioned_by TEXT);''')
 except:
 	pass
 for bleat_dir in glob.glob("dataset-large/bleats/*"):
@@ -82,19 +83,9 @@ for bleat_dir in glob.glob("dataset-large/bleats/*"):
 	latitude = default_str
 	txt = re.split(r'\n',open(bleat_dir,'r').read())
 	for line in txt:
-		line = re.sub("'","&prime;",line)
-		line = re.sub("<","&lt;",line)
-		line = re.sub(">","&gt;",line)
-		line = re.sub("&","&amp;",line)
-		line = re.sub("¢","&cent;",line)
-		line = re.sub("£","&pound;",line)
-		line = re.sub("¥","&yen;",line)
-		line = re.sub("€","&euro;",line)
-		line = re.sub("©","&copy;",line)
-		line = re.sub("®","&reg;",line)
-		line = re.sub(":","&col")
 		if re.match(r'^\s*bleat:',line):
 			content = re.sub(r'^\s*bleat:\s*','',line)
+			content = special_char_filter.special_char_filter(content)
 		elif re.match(r'^\s*time:',line):
 			time = re.sub(r'^\s*time:\s*','',line)
 		elif re.match(r'^\s*username:\s*',line):
@@ -105,8 +96,8 @@ for bleat_dir in glob.glob("dataset-large/bleats/*"):
 			latitude =  re.sub(r'^\s*latitude:\s*','',line)
 		elif re.match(r'^\s*in_reply_to:',line):
 			in_reply_to =  re.sub(r'^\s*in_reply_to:\s*','',line)
-	operation = '''INSERT INTO bleats values('{0}','{1}','{2}','{3}','{4}','{5}','{6}')'''.format(bleat_No,username,content,in_reply_to,time,longitude,latitude)
-	print operation
-	c.execute(operation)
+	settings = (bleat_No,username,content,in_reply_to,time,longitude,latitude,"")
+	operation = '''INSERT INTO bleats values(?,?,?,?,?,?,?,?)'''
+	c.execute(operation,settings)
 conn.commit()
 conn.close()

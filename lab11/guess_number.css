@@ -5,6 +5,7 @@ input {
 	font-size: 2em;
 	margin:60px;
 	text-align:center;
+	width:80%;
 }
 body {
 	background-color:#eee;

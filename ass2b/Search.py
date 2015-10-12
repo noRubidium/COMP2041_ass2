@@ -11,8 +11,6 @@ def search(database,table,field,value,is_partial = False,order_by = default_str 
 		operation="SELECT * FROM {0} WHERE {1} = '{2}'"
 	else:
 		operation="SELECT * FROM {0} WHERE {1} LIKE '{2}'"
-	if not order_by == default_str:
-		operation += "ORDERED BY "+order_by+" ASC"
 	c.execute(operation.format(table,field,value))
 	w=c.fetchall()
 	

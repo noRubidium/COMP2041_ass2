@@ -10,6 +10,7 @@ import glob, re
 import os.path
 import datetime
 import sqlite3
+import cgi
 
 # This section define some global variables
 default_str = ""
@@ -19,7 +20,7 @@ base = "html/"
 
 # definition of all types of classes
 
-
+# cgi.test()
 # this is the generic class of a tag		
 class tag:
 	def __init__(self,name,content = "",attributes=dict()):
@@ -107,7 +108,7 @@ class Bleat(Location):
 			self.exist = is_exist
 	def format_content(self):
 		result = self.content
-		result = re.sub(r'@([^\s\@]*)',
+		result = re.sub(r'@(\w+)',
 			r'<div style="position:inline-block"><form action="bitter.cgi" method="post" class="form-inline"><input type="hidden" name="username" value="\1"><button value="User_name" name="action" class="" style="border:0px">@\1</button></form></div>',result)
 		return result
 	def print_reply(self):
@@ -160,16 +161,18 @@ class User(Location,Picture):
 	def bleat_list(self):
 		return self.bleats
 	def add_bleats(self,bleat_No):
-		self.bleats.append(bleat_No)
+		if not bleat_No in self.bleats:
+			self.bleats.append(bleat_No)
 	def add_listens(self,username):
-		self.listens.append(username)
+		if not username in self.listens:
+			self.listens.append(username)
 	def update(self):
 		conn=sqlite3.connect("database/User.db")
 		c = conn.cursor()
 		bleats = ",".join(self.bleats)
 		listens = " ".join(self.listens)
 		operation = "INSERT OR REPLACE INTO users VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
-		values=(self.UID,self.username,self.full_name,self.email,listens,self.password,
+		values=(self.UID, self.username, self.full_name, self.email,listens, self.password,
 			self.longitude,self.latitude,self.suburb,self.pic_path,bleats,self.status)
 		c.execute(operation,values)
 		conn.commit()
@@ -177,7 +180,17 @@ class User(Location,Picture):
 	def user_info(self):
 		return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),
 	    	self.username,self.print_loc(),self.full_name)
-	
+	def main_page(self):
+		import Search
+		#add to the user the bleats he follows
+		for listening in self.listens:
+			following = Search.search_user_by_ID_e(listening)
+			for bleats in following.bleats:
+				self.add_bleats(bleats)
+		#add to the user the bleats mentioning him
+		bleat_list = Search.search_bleat_by_content("@"+self.username)
+		for bleat in bleat_list:
+			self.add_bleats(bleat)
 	def print_listening(self):
 		string=""
 		for listen in self.listens:
@@ -185,20 +198,27 @@ class User(Location,Picture):
 		return open(base+"listening_panel.html").read().format(string)
 	
 	def print_bleats(self):
+		import Search
 		string=""
 		def getKey(custom):
 			return custom.time
 		bleat_list=list()
 		for bleat in self.bleats:
-			import Search
-			bleat_list.append(Search.search_bleat_by_bleat_ID(bleat))
+			try:
+				bleat_list.append(Search.search_bleat_by_bleat_ID(bleat))
+			except:
+				continue
 		for bleat in sorted(bleat_list,key=getKey,reverse=True):
 			string += bleat.format_bleat()
 		return open(base+"bleat_panel.html").read().format(string)
 	def user_display(self):
 		txt = open(base + "user_display.html").read()
-		return txt.format(self.user_info(),
-			self.print_listening(),self.print_bleats())+open(base + "style_bleat.html").read()
+		try:
+			return txt.format(self.user_info(),
+				self.print_listening(),self.print_bleats())+open(base + "style_bleat.html").read()
+		except:
+			#temporary for user not found
+			return ""
 
 # html templates
 class header:
@@ -234,7 +254,7 @@ def nav_bar_display(username):
 
 def my_account_menu(username,password):
 	return '''<li><a href="#">Dashboard</a></li>
-            <li><a href="Logout.cgi" action="Logout">Logout</a></li>'''.format(username,password)
+            <li><a href="Logout.cgi" action="Logout">Logout</a></li>'''
       
 
 	

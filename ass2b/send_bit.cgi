@@ -10,13 +10,14 @@ base = "html/"
 
 try:
 	cookie = Cookie.SimpleCookie(os.environ["HTTP_COOKIE"])
+	form = cgi.FieldStorage()
 	if login_validate.validate(cookie["logged_in"].value):
 		print cookie.output()
 		print
 		print Html.header("Bitter").__str__()
 		username = cookie["username"].value
 		print Html.nav_bar_display(username)
-		form = cgi.FieldStorage()
+		
 		if 'action' in form.keys() and form['action'].value== "POST":
 			content = special_char_filter.special_char_filter(form['bleat_content'].value) 
 			#try every value which can be blank
@@ -45,17 +46,20 @@ try:
 			selection=(username,content,time)
 			c.execute(operation,selection)
 			bleatID = str(c.fetchone()[0])
-			print type(bleatID)
-			print bleatID
 			conn.close()
 			# Update the user database
 			user = Search.search_user_by_ID_e(username)
 			user.add_bleats(bleatID)
-			print user.bleats
 			user.update()
+			user.main_page()
+			print user.user_display()
 		else:
 			#print the default empty send bit page
-			print open(base+"send_bleats.html").read();
+			try:
+				in_reply_to = form["in_reply_to"]
+			except:
+				in_reply_to =""
+			print open(base+"send_bleats.html").read().format(in_reply_to);
 	#if the user is not logged in: print the primary page
 	else:
 		print 
