@@ -1,0 +1,26 @@
+<div class="single_bleat col-xs-12 col-sm-4 col-md-3">
+	{6}
+	<!-- This is for user info panel -->
+</div>
+<div class="single_bleat col-xs-12 col-sm-8 col-md-6">
+	<div class="list-group" style="">
+		<div class="list-group-item container" style="background-color:#f5f2f9">
+			<div class="col-sm-12" style="opacity:1;margin:3%;padding:3%;min-height:100px;width:94%;border:5px solid white;background-color:white;font-size:1.3em">{2}</div>
+			<div class="col-sm-1">{0}</div>
+			<div class="col-sm-1" align="right">
+				{1}
+			</div>
+			<div class="col-sm-3">{3}</div>
+			<div class="col-sm-4" align="right"><h6><small>{4}</small></h6></div>
+		</div>
+	<div class="list-group-item" >
+		<div class="row">
+			<form method="post" action="send_bit.cgi">
+				<div id='myReply' style="margin:2em"></div>
+				<input name="in_reply_to" id="in_reply_to" type="hidden" value="{5}"/>
+				<!--This is for in reply to-->
+			</form>
+			<script type="text/babel" src="js/reply_bleats.js">    </script>
+		</div>
+	</div>
+</div>
