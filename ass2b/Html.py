@@ -111,6 +111,8 @@ class Bleat(Location):
 		result = self.content
 		result = re.sub(r'@(\w+)',
 			r'<div style="position:inline-block"><form action="bitter.cgi" method="post" class="form-inline"><input type="hidden" name="username" value="\1"><button value="User_name" name="action" class="" style="border:0px">@\1</button></form></div>',result)
+		result = re.sub(r'([^&])#(\w+)',
+			r'\1<div style="position:inline-block"><form action="search_bleats.cgi" method="post" class="form-inline"><input type="hidden" name="key_word" value="#\2"><button value="search" name="action" class="" style="border:0px">#\2</button></form></div>',result)
 		return result
 	def print_reply(self):
 		if self.in_reply_to == "":

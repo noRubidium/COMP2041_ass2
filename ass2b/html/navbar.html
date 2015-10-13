@@ -29,12 +29,17 @@
         </ul>
         <form class="navbar-form navbar-left" role="search" action="search_user.cgi">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" name="username">
+            <input type="text" class="form-control" placeholder="Search for user" name="username">
           </div>
           <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
+        <form class="navbar-form navbar-left" role="search" action="search_bleats.cgi">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search for bleats" name="key_word">
+          </div>
+          <button type="submit" class="btn btn-default" name="action" value="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">New Bleat</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -45,18 +50,22 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+
+  <!--hidden field for new bleats-->
   <div>
     <div class="col-xs-12 col-sm-10 col-md-6" style="position:absolute; display:block; top:0; left:0; width:100%; height:100%; background-color:rgba(70,70,70,0.8);z-index:10" id="post_block">
         <div class="col-xs-12" style="position:absolute;background-color:rgba(255,255,255,0.9);padding:20px; z-index:10;left:50%;top:50%;width:700px;margin-left:-350px; margin-top: -125px">
-            <div class="col-xs-8"><h2>Post a new bleat</h2></div>
-            <div align="right">
-                <span class="glyphicon glyphicon-remove" onclick="$('#post_block').toggle()">
-                </span>
-            </div>
-          <form method="post" action="send_bit.cgi">
-                <div id='myDiv'>
+          <div class="col-xs-8">
+            <h2>Post a new bleat</h2>
           </div>
-          <input name="in_reply_to" type="hidden" value=""/><!--This is for in reply to-->
+          <div align="right">
+              <span class="glyphicon glyphicon-remove" onclick="$('#post_block').toggle();$('#in_reply_to').val('');">
+              </span>
+          </div>
+          <form method="post" action="send_bit.cgi">
+            <div id='myDiv'>
+            </div>
+            <input name="in_reply_to" id="in_reply_to" type="hidden" value=""/><!--This is for in reply to-->
           </form>
           <script type="text/babel" src="js/send_bleats.js">    </script>
         </div>

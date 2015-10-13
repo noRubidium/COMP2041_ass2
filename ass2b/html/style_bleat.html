@@ -31,7 +31,7 @@ body{
 }
 .bleat-group {
 	padding-top:20px;
-	max-height: 700px;
+	max-height: 600px;
 	overflow: auto;
 	background-color:rgba(150,205,205,0.6);
 	border-radius:0 0 5px 5px;
@@ -43,3 +43,25 @@ body{
 	height:15px;
 }
 </style>
+<script>
+	$(document).ready(function(){
+		var length = $('.single_bleat').length;
+		var max_length = 16;
+		$('.single_bleat').hide();
+		$('.single_bleat').slice(0,max_length).show();
+		var num_page = length/max_length;
+		var iter=0;
+		while (iter < num_page){
+			$('#bleat_page').append("<button style='border:0' class='page'>"+(iter+1)+"</button>");
+			iter=iter + 1;
+		}
+		$(".page").on('click',function(){
+			var max_length = 16;
+			var page_num = $(this).text();
+			$('.single_bleat').hide();
+			console.log((page_num-1) * max_length);
+			$('.single_bleat').slice((page_num-1) * max_length,
+				page_num * max_length).show();
+		});
+	});
+</script>
