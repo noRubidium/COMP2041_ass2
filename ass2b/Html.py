@@ -102,6 +102,8 @@ class Bleat(Location):
 			self.bleat_No=bleat_No
 			Location.__init__(self,longitude,latitude)
 			self.content = content
+			if time == default_str:
+				time = "0"
 			time = datetime.datetime(1970,1,1) + datetime.timedelta(0,int(time))
 			self.time = time
 			self.author = username
@@ -118,6 +120,12 @@ class Bleat(Location):
 		if self.in_reply_to == "":
 			return ""
 		else:
+			import Search
+			reply_to = Search.search_bleat_by_bleat_ID(self.in_reply_to)
+			if reply_to.exist:
+				return open(base+"reply_dropdown.html").read().format(reply_to.content + "<p/><strong> By:</strong>"+ reply_to.author)
+			else:
+				return ""
 			return open(base+"reply_dropdown.html").read().format(self.in_reply_to)
 	def format_bleat(self):
 		return open(base+"single_bleat.html").read().format(self.print_loc_row(),
@@ -181,8 +189,10 @@ class User(Location,Picture):
 		conn.commit()
 		conn.close()
 	def user_info(self):
-		return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),
-	    	self.username,self.print_loc(),self.full_name)
+		if self.exist:
+			return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),self.username,self.print_loc(),self.full_name)
+		else:
+			return open(base+"info_panel.html").read().format(img("img/default.jpg").__str__(),"Unknown","Unknown","Unknown")
 	def main_page(self):
 		import Search
 		#add to the user the bleats he follows
@@ -216,6 +226,7 @@ class User(Location,Picture):
 		return open(base+"bleat_panel.html").read().format(string)
 	def user_display(self):
 		txt = open(base + "user_display.html").read()
+		self.print_bleats()
 		try:
 			return txt.format(self.user_info(),
 				self.print_listening(),self.print_bleats())+open(base + "style_bleat.html").read()

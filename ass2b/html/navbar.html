@@ -53,21 +53,25 @@
 
   <!--hidden field for new bleats-->
   <div>
-    <div class="col-xs-12 col-sm-10 col-md-6" style="position:absolute; display:block; top:0; left:0; width:100%; height:100%; background-color:rgba(70,70,70,0.8);z-index:10" id="post_block">
+    <div class="col-xs-12 col-sm-10 col-md-6" style="position:absolute; display:block; top:0; left:0; width:100%; height:100%; background-color:rgba(20,20,20,0.8);z-index:10;display:none" id="post_block">
         <div class="col-xs-12" style="position:absolute;background-color:rgba(255,255,255,0.9);padding:20px; z-index:10;left:50%;top:50%;width:700px;margin-left:-350px; margin-top: -125px">
           <div class="col-xs-8">
             <h2>Post a new bleat</h2>
           </div>
+          <p>
           <div align="right">
               <span class="glyphicon glyphicon-remove" onclick="$('#post_block').toggle();$('#in_reply_to').val('');">
               </span>
           </div>
-          <form method="post" action="send_bit.cgi">
-            <div id='myDiv'>
-            </div>
-            <input name="in_reply_to" id="in_reply_to" type="hidden" value=""/><!--This is for in reply to-->
-          </form>
-          <script type="text/babel" src="js/send_bleats.js">    </script>
+          <p/>
+          <div class="row">
+		  <form method="post" action="send_bit.cgi">
+		    <div id='myDiv' style="margin:2em">
+		    </div>
+		    <input name="in_reply_to" id="in_reply_to" type="hidden" value=""/><!--This is for in reply to-->
+		  </form>
+		  <script type="text/babel" src="js/send_bleats.js">    </script>
+	 </div>
         </div>
     </div>
   </div>
