@@ -59,6 +59,14 @@ else:
 			user = Search.search_user_by_ID_e(username)
 			print_string = print_string + Html.nav_bar_display(username)
 			print_string = print_string + user.user_display()
+		elif action == "un_listen":
+			me = cookie["username"].value
+			username = form['username'].value
+			user = Search.search_user_by_ID_e(me)
+			user.listens.remove(username)
+			user.update()
+			print_string = print_string + Html.nav_bar_display(username)
+			print_string = print_string + user.user_display()
 		elif action == "main":
 			username = cookie["username"].value
 			print_string = print_string + Html.nav_bar_display(username)
