@@ -99,6 +99,7 @@ class Picture(object):
 class Bleat(Location):
 	def __init__(self,bleat_No=default_str,username=default_str, content=default_str,in_reply_to=default_str,
 	time=default_str,longitude=default_str,latitude=default_str,is_exist=True):
+			self.bleat_No=bleat_No
 			Location.__init__(self,longitude,latitude)
 			self.content = content
 			time = datetime.datetime(1970,1,1) + datetime.timedelta(0,int(time))
@@ -118,7 +119,7 @@ class Bleat(Location):
 			return open(base+"reply_dropdown.html").read().format(self.in_reply_to)
 	def format_bleat(self):
 		return open(base+"single_bleat.html").read().format(self.print_loc_row(),
-		self.print_reply(),self.format_content(),self.author,self.time)
+		self.print_reply(),self.format_content(),self.author,self.time,self.bleat_No)
 	def __str__(self):
 		#these returns need formating
 		if self.exist:

@@ -9,11 +9,16 @@
 		$(this).siblings().show(500);
 		$(this).hide(500);
 	});
+    $('.reply_button').on('click',function(){
+        var bleat_No = $(this).siblings('input').val();
+        console.log(bleat_No);
+    });
 	/*$("#loginform").mouseleave(function(){
 		$(this).siblings().delay(2000).show(200);
 		$(this).delay(2000).hide(200);
 	});*/
     });
+	$('#post_block').toggle()
     </script>
     <style>
     .main{
