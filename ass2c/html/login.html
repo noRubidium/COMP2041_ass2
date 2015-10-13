@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<img src = {0} class="img-responsive img-rounded" id="welcome_img">
+		</img>
+		<div class="form col-md-12 panel panel-default" id="loginform" bgcolor="#fff">
+			<div class="panel-heading"><h2 class="text-center">UNLESS YOU LOGIN</h2></div>
+			<form action="#" method="post" class="login-form panel-body">
+				<div class="form-group">
+					<label for="Username">Username</label>
+					<input type="Username" class="form-control" id="Username" placeholder="Username" name="username">
+				</div>
+				<div class="form-group">
+					<label for="Password">Password</label>
+					<input type="password" class="form-control" id="Password" placeholder="Password" name="password">
+				</div>
+				<input type="submit" name="action" value="Login" class="btn btn-default"/>
+				<div class="alert alert-warning" role="alert" {1}>Please enter your password and username</div>
+				<div class="alert alert-warning" role="alert" {2}>User does not exist</div>
+				<div class="alert alert-danger" role="alert" {3}>Wrong username or password</div>
+			</form>
+		</div>
+	</div>
+</div>

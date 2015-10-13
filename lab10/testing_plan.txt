@@ -1,0 +1,5 @@
+Hello	23d12d23	Validate	23d12d23 is invalid - does not contain exactly 16 digits
+Test2	1234123412341234	Validate	1234123412341234 is invalid 
+Test3	1823233333333540	Validate	1823233333333540 is valid 
+Test4	asdgebwasrgfasd	Reset	Nothing
+Test5	*	Close	Thank you for using the Credit Card Validator. 

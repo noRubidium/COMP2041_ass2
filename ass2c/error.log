@@ -1,0 +1,78 @@
+
+
+Set-Cookie: __utma=207128449.1072484467.1430705958.1438826223.1439445748.13
+Set-Cookie: __utmz=207128449.1439445748.13.9.utmcsr=handbook.unsw.edu.au|utmccn=(referral)|utmcmd=referral|utmcct=/undergraduate/programs/2015/3978.html
+Set-Cookie: _ga=GA1.3.1072484467.1430705958
+Set-Cookie: _hp2_id.1532377119=5729997632234859.1009789817.2427122800
+Set-Cookie: _jsuid=3797844667
+Set-Cookie: _referrer_og=http%3A%2F%2Fwww.handbook.unsw.edu.au%2Fundergraduate%2Fprograms%2F2015%2F3978.html
+Set-Cookie: ajs_anonymous_id=%22ee23f30d-7efb-4394-89e5-e410bc2c7733%22
+Set-Cookie: ajs_group_id=null
+Set-Cookie: ajs_user_id=null
+Set-Cookie: logged_in=0; expires=2015-10-08 01:15:58.141218<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Bitter</title>
+    <meta charset="utf-8" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+    
+    <style type=text/css>
+    </style>
+</head>
+<body background="img/background.png">
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<img src = img/You-Shall-Not-Pass.png class="img-responsive img-rounded" id="welcome_img">
+		</img>
+		<div class="form col-md-12 panel panel-default" id="loginform" bgcolor="#fff">
+			<div class="panel-heading"><h2 class="text-center">UNLESS YOU LOGIN</h2></div>
+			<form action="#" method="post" class="login-form panel-body">
+				<div class="form-group">
+					<label for="Username">Username</label>
+					<input type="Username" class="form-control" id="Username" placeholder="Username" name="username">
+				</div>
+				<div class="form-group">
+					<label for="Password">Password</label>
+					<input type="password" class="form-control" id="Password" placeholder="Password" name="password">
+				</div>
+				<input type="submit" name="action" value="Login" class="btn btn-default"/>
+				<div class="alert alert-warning" role="alert" hidden>Please enter your password and username</div>
+				<div class="alert alert-warning" role="alert" hidden>User does not exist</div>
+				<div class="alert alert-danger" role="alert" hidden>Wrong username or password</div>
+			</form>
+		</div>
+	</div>
+</div><style>
+#loginform{
+	position:absolute;
+	top:400px;
+	left:X/2;
+	background-color:#fff;
+}
+
+</style>    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    	$("*").css("border-radius","0");
+    	$(".list-group-item").css("width","100%");
+        $("#welcome_img").siblings().hide();
+	$("#welcome_img").mouseover(function(){
+		$(this).siblings().show(200);
+		$(this).hide(200);
+	});
+	$("#loginform").mouseleave(function(){
+		$(this).siblings().delay(2000).show(200);
+		$(this).delay(2000).hide(200);
+	});
+    });
+    </script>
+    <style>
+    .main{
+        top:20px;
+    }
+    </style>
+</body>
+</html>

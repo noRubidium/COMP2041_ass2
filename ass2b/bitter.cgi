@@ -63,7 +63,22 @@ else:
 			me = cookie["username"].value
 			username = form['username'].value
 			user = Search.search_user_by_ID_e(me)
-			user.listens.remove(username)
+			try:
+				user.listens.remove(username)
+			except:
+				pass
+			user.update()
+			print_string = print_string + Html.nav_bar_display(username)
+			print_string = print_string + user.user_display()
+		elif action == "listen":
+			me = cookie["username"].value
+			username = form['username'].value
+			user = Search.search_user_by_ID_e(me)
+			try:
+				if not username in user.listens and not username == me:
+					user.listens.append(username)
+			except:
+				pass
 			user.update()
 			print_string = print_string + Html.nav_bar_display(username)
 			print_string = print_string + user.user_display()

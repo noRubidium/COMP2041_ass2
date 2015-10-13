@@ -1,0 +1,45 @@
+<style>
+@keyframes display {
+    0%   {
+    	background-color:rgba(0,0,0,0);
+    	color:rgba(255,255,255,0);
+    }
+    100% {
+    	background-color:rgba(0,0,0,0.8);
+    	color:rgba(255,255,255,1);
+    }
+ }
+
+.menu-mark ul{
+	display:none;
+}
+.menu-mark:hover ul{
+	display:block;
+	position:absolute;
+	z-index:100;
+	float:left;
+	width:100px;
+	animation-name: display;
+	animation-duration: 0.5s;
+	font-family: Lato, Geneva, sans-serif;
+	background-color:rgba(0,0,0,0.8);
+	color:#fff;
+	padding:5px;
+}
+body{
+    font-family: Verdana, Geneva, sans-serif;
+}
+.bleat-group {
+	padding-top:20px;
+	max-height: 700px;
+	overflow: auto;
+	background-color:rgba(150,205,205,0.6);
+	border-radius:0 0 5px 5px;
+}
+.menu-item {
+	over-flow:none;
+}
+.menu-mark {
+	height:15px;
+}
+</style>

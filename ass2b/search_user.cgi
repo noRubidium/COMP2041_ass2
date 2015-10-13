@@ -25,7 +25,7 @@ try:
 			print open(base+"user_search.html").read().format(string,username_s)
 		else:
 			#print the default empty search page
-			pass
+			print open(base+"404.html").read()
 		print Html.footer().__str__()
 	else:
 		print 
