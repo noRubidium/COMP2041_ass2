@@ -21,7 +21,9 @@ try:
 			bleat_list = Search.search_bleat_by_content(key)
 			if len(bleat_list) > 0:
 				string=""
-				for bleat in bleat_list:
+				def getKey(custom):
+					return custom.time
+				for bleat in sorted(bleat_list,key=getKey,reverse=True):
 					string+= bleat.format_bleat()
 				print "<div class='offset3 col-xs-12 col-sm-8 col-md-6'>"
 				print open(base+"bleat_panel.html").read().format(string)
