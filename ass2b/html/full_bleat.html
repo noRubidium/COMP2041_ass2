@@ -2,17 +2,33 @@
 	{6}
 	<!-- This is for user info panel -->
 </div>
+<!-- Here is to display the main part of the bleat including the reply section -->
 <div class="single_bleat col-xs-12 col-sm-8 col-md-6">
+	<!-- Main part of the single bleat full view -->
 	<div class="list-group" style="">
 		<div class="list-group-item container" style="background-color:#f5f2f9">
-			<div class="col-sm-12" style="opacity:1;margin:3%;padding:3%;min-height:100px;width:94%;border:5px solid white;background-color:white;font-size:1.3em">{2}</div>
-			<div class="col-sm-1">{0}</div>
+			<!-- Bleat content-->
+			<div class="col-sm-12" style="opacity:1;margin:3%;padding:3%;min-height:100px;width:94%;border:5px solid white;background-color:white;font-size:1.3em">
+				{2}
+			</div>
+			<!-- Location -->
+			<div class="col-sm-1">
+				{0}
+			</div>
+			<!-- IN_REPLY_TO -->
 			<div class="col-sm-1" align="right">
 				{1}
 			</div>
-			<div class="col-sm-3">{3}</div>
-			<div class="col-sm-4" align="right"><h6><small>{4}</small></h6></div>
+			<!-- Author -->
+			<div class="col-sm-3">
+				{3}
+			</div>
+			<!-- Time -->
+			<div class="col-sm-4" align="right">
+				<h6><small>{4}</small></h6>
+			</div>
 		</div>
+	<!-- Main part for replying section -->
 	<div class="list-group-item" >
 		<div class="row">
 			<form method="post" action="send_bit.cgi">
@@ -24,3 +40,16 @@
 		</div>
 	</div>
 </div>
+<!-- This part is to display the relevant bleats for it (including the bleats replying to it and the bleat replying to that bleat and so on) -->
+<div class="col-xs-12 col-sm-12 col-md-3">
+	<!-- relevant bleat -->
+	<div id='relevantBleats'></div>
+</div>
+<script type="text/babel" src='js/relevant_bleats.js'></script>
+<script type="text/babel">
+	var replies=document.findItemByID('relevantBleats');
+	ReactDOM.render=(
+		<RelevantBleats source="find_reply.cgi?bleat_No={5}"/>,
+		replies
+		);
+</script>

@@ -25,7 +25,6 @@ print_string =  print_string + Html.header("Bitter").__str__()
 if not login_validate.validate(cookie["logged_in"].value):
 	if 'action' in form.keys():
 		action = form['action'].value
-		print_string += action
 	else:
 		action = ""
 	if action == 'Login':
@@ -47,8 +46,10 @@ if not login_validate.validate(cookie["logged_in"].value):
 						cookie["logged_in"] = str(random.randrange(1, 10000000))
 						cookie["username"] = username
 						user.main_page()
-						print_string = print_string + Html.nav_bar_display(username);
+						print_string = print_string + Html.nav_bar_display(username)
 						print_string = print_string + user.user_display()
+	elif action == 'Register':
+		print_string += Html.register_page()
 	else:
 		print_string = print_string + Html.login_page_display()
 else:

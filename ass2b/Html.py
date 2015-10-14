@@ -270,5 +270,6 @@ def my_account_menu(username,password):
 	return '''<li><a href="#">Dashboard</a></li>
             <li><a href="Logout.cgi" action="Logout">Logout</a></li>'''
       
-
-	
+def register_page():
+	string = open(base+"register.html").read()
+	return string
