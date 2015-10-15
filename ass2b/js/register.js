@@ -46,7 +46,7 @@ var Register = React.createClass({
 		}
 
 		var password = this.refs.password.value;
-		re=/[\w\-\s]{8,16}/;
+		re=/[\w\-\s]{6,16}/;
 		if(password.search(re) != -1){
 			this.setState({valid_password:true});
 		}else{
@@ -96,7 +96,7 @@ var Register = React.createClass({
 	},
 	render: function(){
 		return (
-				<form action="register.cgi" method="POST">
+				<form action="register.cgi">
 					<h2>Register</h2>
 					<div className="col-xs-6">
 						<div className="form-group">
