@@ -96,12 +96,12 @@ var Register = React.createClass({
 	},
 	render: function(){
 		return (
-				<form action="register.cgi">
+				<form enctype="multipart/form-data" action="register.cgi" method="post">
 					<h2>Register</h2>
 					<div className="col-xs-6">
 						<div className="form-group">
 							<label>Email address</label>
-							<input type="email" className="form-control" onChange={this.change_handle} ref="email" placeholder="Email"/>
+							<input type="email" name="email" className="form-control" onChange={this.change_handle} ref="email" placeholder="Email"/>
 							<p className="help-block">Example: Andrew.t@cse.unsw.edu.au</p>
 							{(
 								this.state.valid_email
@@ -110,7 +110,7 @@ var Register = React.createClass({
 						</div>
 						<div className="form-group">
 							<label>User name</label>
-							<input type="text" className="form-control" onChange={this.change_handle} ref="username" placeholder="username"/>
+							<input type="text" name="username" className="form-control" onChange={this.change_handle} ref="username" placeholder="username"/>
 							<p className="help-block">Can only include: A-Z, a-z, _, -, 0-9.</p>
 							{(
 								this.state.valid_username
@@ -119,7 +119,7 @@ var Register = React.createClass({
 						</div>
 						<div className="form-group">
 							<label>Full name</label>
-							<input type="text" className="form-control" onChange={this.change_handle} ref="full_name" placeholder="full_name" />
+							<input type="text" name="full_name" className="form-control" onChange={this.change_handle} ref="full_name" placeholder="full_name" />
 							<p className="help-block">Can only include normal alphabets</p>
 							{(
 								this.state.valid_full_name
@@ -128,7 +128,7 @@ var Register = React.createClass({
 						</div>
 						<div className="form-group">
 							<label>Password</label>
-							<input type="password" className="form-control" onChange={this.change_handle} ref="password" placeholder="Password"/>
+							<input type="password" name="password" className="form-control" onChange={this.change_handle} ref="password" placeholder="Password"/>
 							{(
 								this.state.valid_password
 								? <span className="glyphicon glyphicon-ok"/>
@@ -148,7 +148,7 @@ var Register = React.createClass({
 					<div className="col-xs-6">
 						<div className="form-group">
 							<label>Upload your photo</label>
-							<input type="file" onChange={this.change_handle} ref="picture_upload"  accept="image/*"/>
+							<input type="file" name="file" onChange={this.change_handle} ref="picture_upload"  accept="image/*"/>
 							{(
 								this.state.valid_file
 								? <span className="glyphicon glyphicon-ok"/>
@@ -156,7 +156,7 @@ var Register = React.createClass({
 						</div>
 						<div className="form-group">
 							<label>Logitude</label>
-							<input type="text" className="form-control" onChange={this.change_handle} ref="longitude" placeholder="longitude" />
+							<input type="text" name="longitude" className="form-control" onChange={this.change_handle} ref="longitude" placeholder="longitude" />
 							{(
 								this.state.valid_longitude
 								? <span className="glyphicon glyphicon-ok"/>
@@ -164,7 +164,7 @@ var Register = React.createClass({
 						</div>
 						<div className="form-group">
 							<label>Latitude</label>
-							<input type="text" className="form-control" onChange={this.change_handle} ref="latitude" placeholder="latitude"/>
+							<input type="text" name="latitude" className="form-control" onChange={this.change_handle} ref="latitude" placeholder="latitude"/>
 							{(
 								this.state.valid_latitude
 								? <span className="glyphicon glyphicon-ok"/>
@@ -172,7 +172,7 @@ var Register = React.createClass({
 						</div>
 						<div className="form-group">
 							<label>Suburb</label>
-							<input type="text" className="form-control" onChange={this.change_handle} ref="suburb" placeholder="suburb" />
+							<input type="text" name="suburb" className="form-control" onChange={this.change_handle} ref="suburb" placeholder="suburb" />
 							{(
 								this.state.valid_suburb
 								? <span className="glyphicon glyphicon-ok"/>
@@ -180,7 +180,7 @@ var Register = React.createClass({
 						</div>
 						<div className="form-group">
 							<label>Self Introduction</label>
-							<textarea className="form-control" rows="3"/>
+							<textarea name="self_intro" className="form-control" rows="3"/>
 							{(
 								this.state.valid_intro
 								? <span className="glyphicon glyphicon-ok"/>
@@ -190,7 +190,7 @@ var Register = React.createClass({
 					<div>This is {this.state.is_valid}</div>
 					{(
 						this.state.is_valid
-						? <button type="submit" className="btn btn-default">Submit</button>
+						? <button type="submit" name="action" value="register" className="btn btn-default">Submit</button>
 						: <button type="submit" className="btn btn-default" disabled>Submit</button>
 					)}
 					<button  className="btn btn-default" type="reset" onClick={this.reset_button}>Reset</button>
