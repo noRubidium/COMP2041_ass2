@@ -96,7 +96,7 @@ var Register = React.createClass({
 	},
 	render: function(){
 		return (
-				<form enctype="multipart/form-data" action="register.cgi" method="post">
+				<form encType="multipart/form-data" action="register.cgi" method="post">
 					<h2>Register</h2>
 					<div className="col-xs-6">
 						<div className="form-group">

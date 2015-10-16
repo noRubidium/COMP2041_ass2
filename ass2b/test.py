@@ -1,13 +1,17 @@
 #!/usr/bin/python
-import sqlite3
-db_filename = "database/User.db"
-conn = sqlite3.connect(db_filename)
+import subprocess
+import smtplib
 
-c = conn.cursor()
-operation="SELECT * FROM users WHERE username='AaronNinja'"
+sender = 'bitter.auto@bitter.com'
+receivers = ['markshen5295@hotmail.com']
 
-c.execute(operation)
-w=c.fetchone()
-print w[0]
-conn.commit()
-conn.close()
+message = """From: From Person <bitter.auto@bitter.com>
+To: To Person <markshen5295@hotmail.com>
+Subject: SMTP e-mail test
+
+This is a test e-mail message.
+"""
+
+smtpObj = smtplib.SMTP('localhost')
+smtpObj.sendmail(sender, receivers, message)         
+print "Successfully sent email"

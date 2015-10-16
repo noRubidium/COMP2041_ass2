@@ -190,9 +190,9 @@ class User(Location,Picture):
 		conn.close()
 	def user_info(self):
 		if self.exist:
-			return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),self.username,self.print_loc(),self.full_name)
+			return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),self.username,self.print_loc(),self.full_name,self.status)
 		else:
-			return open(base+"info_panel.html").read().format(img("img/default.jpg").__str__(),"Unknown","Unknown","Unknown")
+			return open(base+"info_panel.html").read().format(img("img/default.jpg").__str__(),"Unknown","Unknown","Unknown","")
 	def main_page(self):
 		import Search
 		#add to the user the bleats he follows

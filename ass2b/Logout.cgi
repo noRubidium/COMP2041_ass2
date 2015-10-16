@@ -8,13 +8,13 @@ try:
     print "Content-Type: text/html"
     print cookie.output()
     print
-    print Html.header("Bitter").__str__()
+    print Html.header("Bitter")
     print Html.login_page_display()
-    print Html.footer().__str__()
+    print Html.footer()
 except (Cookie.CookieError, KeyError):
     print "Content-Type: text/html"
     print 
     print
-    print Html.header("Bitter").__str__()
+    print Html.header("Bitter")
     print Html.login_page_display()
-    print Html.footer().__str__()
+    print Html.footer()
