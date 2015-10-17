@@ -158,7 +158,7 @@ class User(Location,Picture):
 			self.exist = is_exist
 			self.status = status
 			self.bleats = [var for var in re.split(r',',bleats) if var]
-			if is_suspended == 0:
+			if is_suspended == '0':
 				self.is_suspended = False
 			else:
 				self.is_suspended = True

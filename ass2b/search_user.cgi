@@ -10,7 +10,7 @@ try:
 	if login_validate.validate(cookie["logged_in"].value):
 		print cookie.output()
 		print
-		print Html.header("Bitter").__str__()
+		print Html.header("Bitter")
 		username = cookie["username"].value
 		print Html.nav_bar_display(username)
 		form = cgi.FieldStorage()
@@ -21,21 +21,28 @@ try:
 			uList_1+=uList_2
 			string=""
 			for user in uList_1:
-				string+=open(base+"user_short.html").read().format(user.username, user.full_name,Html.img(user.pic_path).__str__())
+				try:
+					bleatNo = user.bleats[-1]
+					bleat = Search.search_bleat_by_bleat_ID(bleatNo)
+					bleat = bleat.content
+				except:
+					bleat = "This user doesn't have recent bleats."
+				string+=open(base+"user_short.html").read().format(user.username, user.full_name,Html.img(user.pic_path).__str__(),bleat)
 			print open(base+"user_search.html").read().format(string,username_s)
+			print open(base+"page.html").read()
 		else:
 			#print the default empty search page
 			print open(base+"404.html").read()
-		print Html.footer().__str__()
+		print Html.footer()
 	else:
 		print 
 		print
-		print Html.header("Bitter").__str__()
+		print Html.header("Bitter")
 		print Html.login_page_display()
-		print Html.footer().__str__()
+		print Html.footer()
 except (Cookie.CookieError, KeyError):
 	print 
 	print
-	print Html.header("Bitter").__str__()
+	print Html.header("Bitter")
 	print Html.login_page_display()
-	print Html.footer().__str__()
+	print Html.footer()

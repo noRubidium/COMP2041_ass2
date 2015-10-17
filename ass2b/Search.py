@@ -85,7 +85,7 @@ def search_user_by_ID_e(value):
 		for i in range(0,len(u)):
 			w.append(re.sub(r'^"\s*','',str(u[i])))
 			w[i] = re.sub(r'"\s*$','',w[i])
-		user = Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10])
+		user = Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10],w[11],w[12])
 	else:
 		user = Html.User(is_exist = False)
 	return user
@@ -103,8 +103,8 @@ def search_user_by_ID_a(value):
 		for i in range(0,len(l)):
 			w.append(re.sub(r'^"\s*','',str(l[i])))
 			w[i] = re.sub(r'"\s*$','',w[i])
-		if w[11] == 0:
-			users.append( Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10],w[11]))
+		if w[12] == '0':
+			users.append( Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10],w[11],w[12]))
 	return users
 	
 #search by arbitrary user ID
@@ -120,8 +120,8 @@ def search_user_by_full_name(value):
 		for i in range(0,len(l)):
 			w.append(re.sub(r'^"\s*','',str(l[i])))
 			w[i] = re.sub(r'"\s*$','',w[i])
-		if w[11] == 0:
-			users.append( Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10]))
+		if w[12] == '0':
+			users.append( Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10],w[11],w[12]))
 	return users
 
 #search by userID exact
@@ -136,7 +136,7 @@ def search_tmp_user_by_key(value):
 		for i in range(0,len(u)):
 			w.append(re.sub(r'^"\s*','',str(u[i])))
 			w[i] = re.sub(r'"\s*$','',w[i])
-		user = Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10])
+		user = Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10],w[11],w[12])
 	else:
 		user = Html.User(is_exist = False)
 	return user
