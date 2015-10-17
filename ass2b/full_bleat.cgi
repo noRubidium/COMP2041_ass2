@@ -16,7 +16,6 @@ try:
 		print Html.nav_bar_display(username)
 		form = cgi.FieldStorage()
 		if "action" in form.keys():
-
 			action = form["action"].value
 			if "bleat_No" in form.keys():
 				bleat_No = form["bleat_No"].value

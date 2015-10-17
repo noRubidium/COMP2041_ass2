@@ -282,3 +282,19 @@ def my_account_menu(username,password):
 def register_page():
 	string = open(base+"register.html").read()
 	return string
+
+def print_json(struct):
+	dictionary = vars(struct)
+	l = list()
+	for (key,var) in dictionary.items():
+		if type(var) == type(True):
+			var = str(var).lower()
+		elif type(var) == type("1"):
+			var = '"'+var+'"'
+		else:
+			var=str(var)
+		key = '"'+key+'"'
+		string = key+": "+var
+		l.append(string)
+	result = "{\n" + ",\n".join(l)+"\n}\n"
+	return result

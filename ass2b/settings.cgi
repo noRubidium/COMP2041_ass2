@@ -12,15 +12,16 @@ try:
 	cookie = Cookie.SimpleCookie(os.environ["HTTP_COOKIE"])
 	form = cgi.FieldStorage()
 	if login_validate.validate(cookie["logged_in"].value):
-		print cookie.output()
-		print
-		print Html.header("Bitter")
-		username = cookie["username"].value
-		print Html.nav_bar_display(username)
-		
 		if 'action' in form.keys():
+			
+			username = cookie["username"].value
+			
 			action = form["action"].value
 			if action == "save_change":
+				print cookie.output()
+				print
+				print Html.header("Bitter")
+				print Html.nav_bar_display(username)
 				# Update the user database
 				user = Search.search_user_by_ID_e(username)
 				if "pic_dir" in form.keys():
@@ -51,7 +52,7 @@ try:
 				operation = "DELETE FROM users WHERE username = ?;"
 				import sqlite3
 				user = Search.search_user_by_ID_e(username)
-				conn = sqlite3.connect("database/Users.db")
+				conn = sqlite3.connect("database/User.db")
 				c = conn.cursor()
 				c.execute(operation,(username,))
 				conn.commit()
@@ -62,8 +63,14 @@ try:
 					operation = "DELETE FROM bleats WHERE bleatID= ?;"
 					c.execute(operation,(bleat,))
 				conn.commit()
-				conn.close
+				conn.close()
+				cookie["logged_in"] = 0
+				print Html.login_page_display()
 			else:
+				print cookie.output()
+				print
+				print Html.header("Bitter")
+				print Html.nav_bar_display(username)
 				user= Search.search_user_by_ID_e(username)
 				if user.is_suspended:
 					check="checked"
@@ -78,6 +85,11 @@ try:
 					});
 				</script>"""
 		else:
+			print cookie.output()
+			print
+			print Html.header("Bitter")
+			username = cookie["username"].value
+			print Html.nav_bar_display(username)
 			user= Search.search_user_by_ID_e(username)
 			if user.is_suspended:
 				check="checked"
