@@ -47,7 +47,22 @@ try:
 				user.main_page()
 				print user.user_display()
 			elif action == "delete":
-				pass
+				# DELETE the user account
+				operation = "DELETE FROM users WHERE username = ?;"
+				import sqlite3
+				user = Search.search_user_by_ID_e(username)
+				conn = sqlite3.connect("database/Users.db")
+				c = conn.cursor()
+				c.execute(operation,(username,))
+				conn.commit()
+				conn.close
+				conn = sqlite3.connect("database/Bleats.db")
+				c = conn.cursor()
+				for bleat in user.bleats:
+					operation = "DELETE FROM bleats WHERE bleatID= ?;"
+					c.execute(operation,(bleat,))
+				conn.commit()
+				conn.close
 			else:
 				user= Search.search_user_by_ID_e(username)
 				if user.is_suspended:
@@ -57,6 +72,11 @@ try:
 				print open(base+"edit_user.html").read().format(user.email,user.username,user.full_name,
 					user.password,user.pic_path,user.longitude,user.latitude,user.suburb,user.status,
 					user.UID,user.listens,user.bleats,check);
+				print """<script>
+				$(document).ready(function(){
+					$("img").addClass("img-responsive");
+					});
+				</script>"""
 		else:
 			user= Search.search_user_by_ID_e(username)
 			if user.is_suspended:
@@ -66,6 +86,7 @@ try:
 			print open(base+"edit_user.html").read().format(user.email,user.username,user.full_name,
 				user.password,user.pic_path,user.longitude,user.latitude,user.suburb,user.status,
 				user.UID,user.listens,user.bleats,check);
+			print open(base+"page.html").read()
 	#if the user is not logged in: print the primary page
 	else:
 		print 
