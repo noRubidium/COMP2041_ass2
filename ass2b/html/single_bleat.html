@@ -12,22 +12,24 @@
 			<div class="col-sm-4" align="right">
 				<h6><small>{4}</small></h6>
 			</div>
-			<div class="col-xs-2">
-				<button class="btn reply_button">Reply</button>
+			<div class="col-xs-1">
+				<button class="btn reply_button"><span class="glyphicon glyphicon-share-alt"></span></button>
 				<input type="hidden" value="{5}">
 			</div>
+			<form  method="post" action="full_bleat.cgi">
 			<div class="col-xs-1">
-				<form  method="post" action="full_bleat.cgi">
+				
 					<input type="hidden" name="bleat_No" value="{5}">
 					<button class="btn delete_bleat" name="action" value="full_display">
 						<span class="glyphicon glyphicon-zoom-in"></span>
 					</button>
-					<button name="action" value="delete">
+			</div>
+			<div class="col-xs-1">
+					<button class="btn delete_bleat" name="action" value="delete">
 						<span class="glyphicon glyphicon-trash"></span>
 					</button>
-				</form>
-				
 			</div>
+			</form>
 		</div>
 	</div>
 	<div class="list-group">

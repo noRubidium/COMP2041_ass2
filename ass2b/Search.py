@@ -103,7 +103,8 @@ def search_user_by_ID_a(value):
 		for i in range(0,len(l)):
 			w.append(re.sub(r'^"\s*','',str(l[i])))
 			w[i] = re.sub(r'"\s*$','',w[i])
-		users.append( Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10]))
+		if w[11] == 0:
+			users.append( Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10],w[11]))
 	return users
 	
 #search by arbitrary user ID
@@ -119,5 +120,23 @@ def search_user_by_full_name(value):
 		for i in range(0,len(l)):
 			w.append(re.sub(r'^"\s*','',str(l[i])))
 			w[i] = re.sub(r'"\s*$','',w[i])
-		users.append( Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10]))
+		if w[11] == 0:
+			users.append( Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10]))
 	return users
+
+#search by userID exact
+def search_tmp_user_by_key(value):
+	db_filename = "database/User.db"
+	table = "tmp_user"
+	field = "key"
+	w=list()
+	l = search(db_filename,table,field,value)
+	if len(l) > 0:
+		u=l[0]
+		for i in range(0,len(u)):
+			w.append(re.sub(r'^"\s*','',str(u[i])))
+			w[i] = re.sub(r'"\s*$','',w[i])
+		user = Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10])
+	else:
+		user = Html.User(is_exist = False)
+	return user

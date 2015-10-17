@@ -11,7 +11,7 @@ try:
 		(userID INTEGER PRIMARY KEY, username TEXT,
 			full_name TEXT, email TEXT,listens TEXT,
 			password TEXT, home_longitude REAL, home_latitude REAL, 
-			home_suburb REAL, picture_dir TEXT,bleats TEXT,status TEXT);''')
+			home_suburb TEXT, picture_dir TEXT,bleats TEXT,status TEXT,is_suspend INTEGER);''')
 
 	print glob.glob("dataset-large/users/*")
 	UID = 0
@@ -56,7 +56,7 @@ try:
 		txt = open(bleats_filename,'r').read()
 		txt = re.sub(r'\n',',',txt)
 		sets = (UID,username,full_name,email,listens,password,home_longitude,home_latitude,home_suburb,picture_dir,txt,status)
-		operation = '''INSERT INTO users values(?,?,?,?,?,?,?,?,?,?,?,?);'''
+		operation = '''INSERT INTO users values(?,?,?,?,?,?,?,?,?,?,?,?,0);'''
 		c.execute(operation,sets)
 		UID += 1
 	conn.commit()

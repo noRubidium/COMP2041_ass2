@@ -14,7 +14,7 @@ try:
 	if login_validate.validate(cookie["logged_in"].value):
 		print cookie.output()
 		print
-		print Html.header("Bitter").__str__()
+		print Html.header("Bitter")
 		username = cookie["username"].value
 		print Html.nav_bar_display(username)
 		

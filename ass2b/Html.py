@@ -109,6 +109,7 @@ class Bleat(Location):
 			self.author = username
 			self.in_reply_to = in_reply_to
 			self.exist = is_exist
+
 	def format_content(self):
 		result = self.content
 		result = re.sub(r'@(\w+)',
@@ -141,7 +142,8 @@ class Bleat(Location):
 class User(Location,Picture):
 	def __init__(self,UID = "null", username = default_str, full_name = default_str, 
 	email = default_str, listens = default_str, password = default_str, longitude = default_str, 
-	latitude = default_str, suburb = default_str,pic_dir = default_str,bleats = default_str,status=default_str,is_exist=True):
+	latitude = default_str, suburb = default_str,pic_dir = default_str,bleats = default_str,status=default_str,
+	is_suspended=0,is_exist=True):
 		if is_exist:
 			self.UID = UID
 			self.username = username
@@ -156,6 +158,10 @@ class User(Location,Picture):
 			self.exist = is_exist
 			self.status = status
 			self.bleats = [var for var in re.split(r',',bleats) if var]
+			if is_suspended == 0:
+				self.is_suspended = False
+			else:
+				self.is_suspended = True
 		else:
 			self.exist = is_exist
 	def __str__(self):
@@ -182,15 +188,18 @@ class User(Location,Picture):
 		c = conn.cursor()
 		bleats = ",".join(self.bleats)
 		listens = " ".join(self.listens)
-		operation = "INSERT OR REPLACE INTO users VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
+		operation = "INSERT OR REPLACE INTO users VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
 		values=(self.UID, self.username, self.full_name, self.email,listens, self.password,
-			self.longitude,self.latitude,self.suburb,self.pic_path,bleats,self.status)
+			self.longitude,self.latitude,self.suburb,self.pic_path,bleats,self.status,self.is_suspended)
 		c.execute(operation,values)
 		conn.commit()
 		conn.close()
 	def user_info(self):
 		if self.exist:
-			return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),self.username,self.print_loc(),self.full_name,self.status)
+			username = self.username 
+			if self.is_suspended:
+				username += "(Suspended)"
+			return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),username,self.print_loc(),self.full_name,self.status)
 		else:
 			return open(base+"info_panel.html").read().format(img("img/default.jpg").__str__(),"Unknown","Unknown","Unknown","")
 	def main_page(self):
@@ -267,7 +276,7 @@ def nav_bar_display(username):
 	return string.format(my_account_menu(username,0))
 
 def my_account_menu(username,password):
-	return '''<li><a href="#">Dashboard</a></li>
+	return '''<li><a href="settings.cgi">Dashboard</a></li>
             <li><a href="Logout.cgi" action="Logout">Logout</a></li>'''
       
 def register_page():
