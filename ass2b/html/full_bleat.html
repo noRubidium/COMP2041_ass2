@@ -39,17 +39,15 @@
 			<script type="text/babel" src="js/reply_bleats.js">    </script>
 		</div>
 	</div>
+	<!-- This part is to display the relevant bleats for it (including the bleats replying to it and the bleat replying to that bleat and so on) -->
+	<div id='replies'>{7}</div>
 </div>
-<!-- This part is to display the relevant bleats for it (including the bleats replying to it and the bleat replying to that bleat and so on) -->
-<div class="col-xs-12 col-sm-12 col-md-3">
-	<!-- relevant bleat -->
-	<div id='relevantBleats'></div>
-</div>
-<script type="text/babel" src='js/relevant_bleats.js'></script>
+
+<!--<script type="text/babel" src='js/find_bleats_r.js'></script>
 <script type="text/babel">
 	var replies=document.findItemByID('relevantBleats');
 	ReactDOM.render=(
 		<RelevantBleats source="find_reply.cgi?bleat_No={5}"/>,
 		replies
 		);
-</script>
+</script>-->

@@ -24,8 +24,18 @@ try:
 					if action == "full_display":
 						author = Search.search_user_by_ID_e(bleat.author);
 						string = author.user_info()
+						queue = list()
+						queue.append(bleat.bleat_No)
+						replies = ""
+						while not len(queue) == 0:
+							bleat_No = queue.pop(0)
+							bleats = Search.search_bleat_by_in_reply_to(bleat_No)
+							for bleat in bleats:
+								queue.append(bleat.bleat_No)
+								replies += bleat.format_bleat()
 						print open(base+"full_bleat.html").read().format(bleat.print_loc_row(),
-				bleat.print_reply(),bleat.format_content(),bleat.author,bleat.time,bleat.bleat_No,string)
+				bleat.print_reply(),bleat.format_content(),bleat.author,bleat.time,bleat.bleat_No,string,replies)
+
 						print open(base+"style_bleat.html").read()
 					elif action == "delete" and bleat.author == username:
 						import sqlite3
