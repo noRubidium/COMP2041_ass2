@@ -26,7 +26,7 @@ try:
 					picture = form["pic_dir"]
 					if picture.filename:
 						user.pic_path = "user_img/"+username+"_profile.jpg"
-						open(user.pic_path, 'w').write(picture.file.read())
+						open("user_img/"+username+"_profile.jpg", 'w').write(picture.file.read())
 				if "longitude" in form.keys():
 					user.longitude = form["longitude"].value
 				if "latitude" in form.keys():
@@ -56,6 +56,7 @@ try:
 				user.pic_path = ""
 				user.update()
 				user.main_page()
+				print user.user_display()
 			elif action == "delete":
 				# DELETE the user account
 				operation = "DELETE FROM users WHERE username = ?;"
