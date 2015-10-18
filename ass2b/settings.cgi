@@ -13,9 +13,7 @@ try:
 	form = cgi.FieldStorage()
 	if login_validate.validate(cookie["logged_in"].value):
 		if 'action' in form.keys():
-			
 			username = cookie["username"].value
-			
 			action = form["action"].value
 			if action == "save_change":
 				print cookie.output()
@@ -27,11 +25,8 @@ try:
 				if "pic_dir" in form.keys():
 					picture = form["pic_dir"]
 					if picture.filename:
-						if user.pic_path == "":
-							user.pic_path = "user_img/"+username+"_profile.jpg"
-							open(user.pic_path, 'w').write(picture.file.read())
-						else:
-							open(user.pic_path, 'w').write(picture.file.read())
+						user.pic_path = "user_img/"+username+"_profile.jpg"
+						open(user.pic_path, 'w').write(picture.file.read())
 				if "longitude" in form.keys():
 					user.longitude = form["longitude"].value
 				if "latitude" in form.keys():
@@ -47,6 +42,20 @@ try:
 				user.update()
 				user.main_page()
 				print user.user_display()
+			elif action == "delete_pic":
+				print cookie.output()
+				print
+				print Html.header("Bitter")
+				print Html.nav_bar_display(username)
+				# Update the user database
+				user = Search.search_user_by_ID_e(username)
+				try:
+					os.remove(user.pic_path)
+				except:
+					pass
+				user.pic_path = ""
+				user.update()
+				user.main_page()
 			elif action == "delete":
 				# DELETE the user account
 				operation = "DELETE FROM users WHERE username = ?;"
@@ -65,6 +74,8 @@ try:
 				conn.commit()
 				conn.close()
 				cookie["logged_in"] = 0
+				print
+				print
 				print Html.login_page_display()
 			else:
 				print cookie.output()

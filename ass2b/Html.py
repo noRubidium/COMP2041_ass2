@@ -92,13 +92,15 @@ class Picture(object):
 		self.pic_path = picdir
 	def __str__(self):
 		return img(self.pic_path).__str__()
+	def pic_responsive(self):
+		return "<img src='"+self.pic_path+"' class='img-responsive'/>"
 		
 
 
 # Bleat class can be used to store the bleats
 class Bleat(Location):
 	def __init__(self,bleat_No=default_str,username=default_str, content=default_str,in_reply_to=default_str,
-	time=default_str,longitude=default_str,latitude=default_str,is_exist=True):
+	time=default_str,longitude=default_str,latitude=default_str,pics=default_str,video=default_str,is_exist=True):
 			self.bleat_No=bleat_No
 			Location.__init__(self,longitude,latitude)
 			self.content = content
@@ -109,7 +111,9 @@ class Bleat(Location):
 			self.author = username
 			self.in_reply_to = in_reply_to
 			self.exist = is_exist
-
+			pic_list = pics.split(", ")
+			self.pics = [Picture(w) for w in pic_list]
+			self.video = video
 	def format_content(self):
 		result = self.content
 		result = re.sub(r'@(\w+)',
@@ -199,7 +203,12 @@ class User(Location,Picture):
 			username = self.username 
 			if self.is_suspended:
 				username += "(Suspended)"
-			return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),username,self.print_loc(),self.full_name,self.status)
+			bg_path = "user_bg/"+username+"_bg.jpg"
+			if os.path.isfile(bg_path):
+				bg = "background='"+bg_path+"'"
+			else:
+				bg=""
+			return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),username,self.print_loc(),self.full_name,self.status,bg)
 		else:
 			return open(base+"info_panel.html").read().format(img("img/default.jpg").__str__(),"Unknown","Unknown","Unknown","")
 	def main_page(self):
@@ -276,7 +285,8 @@ def nav_bar_display(username):
 	return string.format(my_account_menu(username,0))
 
 def my_account_menu(username,password):
-	return '''<li><a href="settings.cgi">Dashboard</a></li>
+	return '''<li><a href="change_bg.cgi">Change Background</a></li>
+		<li><a href="settings.cgi">Dashboard</a></li>
             <li><a href="Logout.cgi" action="Logout">Logout</a></li>'''
       
 def register_page():
