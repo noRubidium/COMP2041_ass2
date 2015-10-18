@@ -34,7 +34,8 @@ try:
 								queue.append(bleat.bleat_No)
 								replies += bleat.format_bleat()
 						print open(base+"full_bleat.html").read().format(bleat.print_loc_row(),
-				bleat.print_reply(),bleat.format_content(),bleat.author,bleat.time,bleat.bleat_No,string,replies)
+							bleat.print_reply(),bleat.format_content(),bleat.author,
+							bleat.time,bleat.bleat_No,string,replies,bleat.print_attachment())
 
 						print open(base+"style_bleat.html").read()
 					elif action == "delete" and bleat.author == username:

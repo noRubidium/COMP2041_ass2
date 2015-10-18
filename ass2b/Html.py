@@ -117,9 +117,9 @@ class Bleat(Location):
 	def format_content(self):
 		result = self.content
 		result = re.sub(r'@(\w+)',
-			r'<div style="position:inline-block"><form action="bitter.cgi" method="post" class="form-inline"><input type="hidden" name="username" value="\1"><button value="User_name" name="action" class="" style="border:0px">@\1</button></form></div>',result)
+			r'<div style="display:inline-block"><form action="bitter.cgi" method="post" class="form-inline"><input type="hidden" name="username" value="\1"><button value="User_name" name="action" class="" style="border:0px">@\1</button></form></div>',result)
 		result = re.sub(r'([^&])#(\w+)',
-			r'\1<div style="position:inline-block"><form action="search_bleats.cgi" method="post" class="form-inline"><input type="hidden" name="key_word" value="#\2"><button value="search" name="action" class="" style="border:0px">#\2</button></form></div>',result)
+			r'\1<div style="display:inline-block"><form action="search_bleats.cgi" method="post" class="form-inline"><input type="hidden" name="key_word" value="#\2"><button value="search" name="action" class="" style="border:0px">#\2</button></form></div>',result)
 		return result
 	def print_reply(self):
 		if self.in_reply_to == "":
@@ -132,15 +132,28 @@ class Bleat(Location):
 			else:
 				return ""
 			return open(base+"reply_dropdown.html").read().format(self.in_reply_to)
+	def print_attachment(self):
+		string = ""
+		for pic in self.pics:
+			if not pic =="":
+				string += "<div class='col-xs-2'>"+pic.pic_responsive()+"</div>\n"
+		if os.path.isfile(self.video):
+			string += "<div class='col-xs-2'>"+'''<video width="320" height="240" controls>
+				<source src="{0}" type="video/mp4">
+			Your browser does not support the video tag.
+			</video>'''.format(self.video)+"</div>\n"
+		return string
 	def format_bleat(self):
 		return open(base+"single_bleat.html").read().format(self.print_loc_row(),
-		self.print_reply(),self.format_content(),self.author,self.time,self.bleat_No)
+		self.print_reply(),self.format_content(),self.author,self.time,
+		self.bleat_No,self.print_attachment())
 	def __str__(self):
 		#these returns need formating
 		if self.exist:
 			return self.content.__str__() + "Time" + self.time.__str__()
 		else:
 			return bleat_error
+
 
 
 class User(Location,Picture):

@@ -5,10 +5,11 @@
             <span class="glyphicon glyphicon-remove" onclick="close()">
             </span>
         </div>
-    	<form method="post" action="send_bit.cgi">
+    	<form method="post" action="send_bit.cgi" encType="multipart/form-data" >
             <div id='myDiv'>
 			</div>
-			<input name="in_reply_to" type="hidden" value="{0}"/><!--This is for in reply to-->
+			<input name="in_reply_to" type="hidden" value="{0}"/>
+            <!--This is for in reply to-->
     	</form>
 	    <script type="text/babel" src="js/send_bleats.js">    </script>
     </div>
