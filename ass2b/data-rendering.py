@@ -71,7 +71,8 @@ try:
 	c.execute('''CREATE TABLE bleats
 		(bleatID INTEGER PRIMARY KEY, username TEXT,
 			bleat TEXT,in_reply_to TEXT,time TEXT,
-			 longitude REAL, latitude REAL,mentioned_by TEXT);''')
+			 longitude REAL, latitude REAL,mentioned_by TEXT
+			 pic_attach TEXT, video_attach TEXT);''')
 except:
 	pass
 for bleat_dir in glob.glob("dataset-large/bleats/*"):

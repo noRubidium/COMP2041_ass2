@@ -21,9 +21,11 @@ if 'key' in form.keys():
 		home_latitude = user.latitude
 		home_suburb = user.suburb
 		picture_dir = user.pic_path
-		if not picture_dir == "":
+		if os.path.isfile("tmp/"+key):
 			picture_dir = "user_img/"+username+"_profile.jpg"
 			os.rename("tmp/"+key, picture_dir)
+		else:
+			picture_dir = 
 		txt = ','.join(user.bleats)
 		status = user.status
 		conn = sqlite3.connect('database/User.db')

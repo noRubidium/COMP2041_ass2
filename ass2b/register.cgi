@@ -79,23 +79,24 @@ if action == "register":
 		# 
 		# import subprocess
 		print "<h2> verifying email has been sent to your mailbox of :"+ email+"<p/> Please click through the link to activate your account.</h2>"
-		# import smtplib
+		import smtplib
 
-		# sender = 'bitter.auto@bitter.com'
-		# receivers = ['markshen5295@gmail.com']
+		sender = 'comp2041ass2ms@gmail.com'
+		receivers = email
 
-		# message = """From: From Person <bitter.auto@bitter.com>
-		# To:  <{1}>
-		# Subject: Verify your registration
+		message = """From: From Person <bitter.auto@bitter.com>
+		To:  <{1}>
+		Subject: Verify your registration
 
-		# Click through this link : {0}
-		# """.format(link,email)
+		Click through this link : {0}
+		""".format(link,email)
 
-		# smtpObj = smtplib.SMTP('localhost')
-		# # smtpObj.login('comp2041ass2ms@gmail.com','12345qazwsx')
-		# smtpObj.sendmail(sender, receivers, message)   
-
-		pass
+		smtpObj = smtplib.SMTP('smtp.gmail.com:587')
+		smtpObj.starttls()
+		smtpObj.login(sender,'12345qazwsx')
+		smtpObj.sendmail(sender, receivers, message)  
+		smtpObj.quit() 
+		
 else:
 	print Html.login_page_display(False,False,False)
 print Html.footer()

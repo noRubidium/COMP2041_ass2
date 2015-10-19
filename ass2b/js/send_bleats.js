@@ -9,7 +9,7 @@ var textStyle = {
 var MarkdownEditor = React.createClass({
 	getInitialState: function() {
 		var value="";
-		return {value: value,length:value.length,longitude:"",latitude:""};
+		return {value: value,length:value.length,longitude:"",latitude:"",data_uri:[]};
 	},
 	handleChange: function() {
 		var value = this.refs.textarea.value;
@@ -30,20 +30,38 @@ var MarkdownEditor = React.createClass({
 		}
 	},
 	handleFile: function(e) {
-        var reader = new FileReader();
-        var file = e.target.files[0];
+        var reader =[]; 
+		var file = [];
+		console.log(e.target.files.length);
+        for(var i=0; i < e.target.files.length;i++){
+        	file.push(e.target.files[i]);
+			reader.push(new FileReader());
+	        reader[i].onload = function(upload) {
+				var li = this.state.data_uri;
+				li.push(upload.target.result);
+	            this.setState({
+	                data_uri:li
+	            });
+	        }.bind(this);
 
-        reader.onload = function(upload) {
-            this.setState({
-                data_uri: upload.target.result
-            });
-            console.log(this.state.data_uri)
-        }.bind(this);
-
-        reader.readAsDataURL(file);
+	        reader[i].readAsDataURL(file[i]);
+			console.log(this.state.data_uri);
+        }
+        
     },
 	render: function() {
-	  
+	  	var img=[];
+		console.log("HI");
+		console.log(this.state.data_uri.length);
+		for(var i=0; i< this.state.data_uri.length;i++){
+			console.log("HI");
+			img.push(<div 
+					className="col-xs-2">
+					<img 
+					src={this.state.data_uri[i]} 
+					className="img-responsive"/>
+				</div>);
+		}
 		return (
 		<div className="markdownEditor">
 			<textarea 
@@ -54,16 +72,15 @@ var MarkdownEditor = React.createClass({
 				onChange={this.handleChange}
 				value={this.state.value}
 				style={textStyle}>{this.state.value}</textarea>
-			<input 
-				type="file" 
-				accept="image/*" 
-				name="myPic" 
-				onChange={this.handleFile}/>
 			<div 
-				className="col-xs-2">
-				<img 
-				src={this.state.data_uri} 
-				className="img-responsive"/>
+				className="col-xs-12">
+				<input 
+					type="file" 
+					accept="image/*" 
+					name="myPic" 
+					multiple="multiple"
+					onChange={this.handleFile}/>
+				{img}
 			</div>
 			<div 
 				className="col-xs-5 col-md-3"

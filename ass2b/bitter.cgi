@@ -78,6 +78,25 @@ else:
 			try:
 				if not username in user.listens and not username == me:
 					user.listens.append(username)
+					user_l = Search.search_user_by_ID_e(username)
+					email = user_l.email
+					# send email
+					import smtplib
+
+					sender = 'comp2041ass2ms@gmail.com'
+					receivers = email
+
+					message = """From: From Person <bitter.auto@bitter.com>
+					To:  <{1}>
+					Subject: {0} starts listening to you now!
+					{0} starts listening to you now!
+					""".format(me,email)
+
+					smtpObj = smtplib.SMTP('smtp.gmail.com:587')
+					smtpObj.starttls()
+					smtpObj.login(sender,'12345qazwsx')
+					smtpObj.sendmail(sender, receivers, message)  
+					smtpObj.quit() 
 			except:
 				pass
 			user.update()

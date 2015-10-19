@@ -1,0 +1,12 @@
+<!-- change_bg page -->
+<div class="col-xs-0 col-sm-1 col-md-2" style="height:100px"></div>
+<div id='edit_user' class="col-xs-12 col-sm-10 col-md-8 thumbnail" style="margin-top:10em">
+	<h2> Configure your account </h2>
+	<form action="change_bg.cgi" enctype="multipart/form-data" method="post" style="margin:10px">
+		<img src="{0}" style="margin:10px" class="img-responsive"/><p/>
+		Change background image: 
+		<input type="file" name="pic_dir" style="margin:10px" /><p/>
+		<button action="submit" name="action" value="save_change">Save the change</button>
+		<button action="submit" name="action" value="delete">Delete the image</button>
+
+</div>

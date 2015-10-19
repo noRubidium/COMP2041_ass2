@@ -53,6 +53,41 @@ try:
 			user.update()
 			user.main_page()
 			print user.user_display()
+			import smtplib
+			sender = 'comp2041ass2ms@gmail.com'
+			smtpObj = smtplib.SMTP('smtp.gmail.com:587')
+			smtpObj.starttls()
+			smtpObj.login(sender,'12345qazwsx')
+			# Send email to related person
+			if not in_reply_to == "":
+				bleat_r = Search.search_bleat_by_bleat_ID(in_reply_to)
+				user = Search.search_user_by_ID_e(bleat_r.author)
+				email = user.email
+				receivers = email
+				
+				message = """From: From Person <bitter.auto@bitter.com>
+				To:  <{1}>
+				Subject: {2} Replied you
+				
+				{2} replied your bleat: {0}
+				Saying that:
+				{3}
+				""".format(bleat_r.content,email,bleat.author,bleat.content)
+				smtpObj.sendmail(sender, receivers, message)
+			
+			for mentioned in re.findall(r'@\w+',bleat.content):
+				user = Search.search_user_by_ID_e(mentioned)
+				if user.exist:
+					email = user.email
+					receivers = email
+					message = """From: From Person <bitter.auto@bitter.com>
+					To:  <{1}>
+					Subject: {2} Mentioned you
+				
+					{2} mentioned you in the bleat: {0}
+					""".format(bleat.content,email,bleat.author)
+					smtpObj.sendmail(sender, receivers, message)
+			smtpObj.quit()
 		else:
 			#print the default empty send bit page
 			try:
