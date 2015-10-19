@@ -17,3 +17,6 @@ if "bleats_recursive" in form.keys():
 			queue.append(bleat.bleat_No)
 			print Html.print_json(bleat)
 			print ","
+elif "username" in form.keys():
+	user = Search.search_user_by_ID_e(form["username"].value)
+	print Html.print_json(user)
