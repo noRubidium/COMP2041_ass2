@@ -1,0 +1,86 @@
+<style>
+@keyframes display {
+    0%   {
+    	background-color:rgba(0,0,0,0);
+    	color:rgba(255,255,255,0);
+    }
+    100% {
+    	background-color:rgba(0,0,0,0.8);
+    	color:rgba(255,255,255,1);
+    }
+ }
+
+.menu-mark ul{
+	display:none;
+}
+.menu-mark:hover ul{
+	display:block;
+	position:absolute;
+	z-index:100;
+	float:left;
+	width:100px;
+	animation-name: display;
+	animation-duration: 0.5s;
+	font-family: Lato, Geneva, sans-serif;
+	background-color:rgba(0,0,0,0.8);
+	color:#fff;
+	padding:5px;
+}
+body{
+    font-family: Verdana, Geneva, sans-serif;
+}
+.bleat-group {
+	padding-top:20px;
+	max-height: 600px;
+	overflow: auto;
+	background-color:rgba(150,205,205,0.6);
+	border-radius:0 0 5px 5px;
+}
+.menu-item {
+	over-flow:none;
+}
+.menu-mark {
+	height:15px;
+}
+@keyframes pic{
+	0% {width: 25%;}
+	100% {width:100%;}
+}
+@keyframes pic-out{
+	0% {width: 100%;}
+	100% {width:25%;}
+}
+.bleat-pic-div:hover{
+	animation-name: pic;
+    animation-duration: 1s;
+    width:100%;
+}
+.bleat-pic-div {
+	animation-name: pic-out;
+    animation-duration: 1s;
+    width:25%;
+}
+</style>
+<script>
+	$(document).ready(function(){
+		var length = $('.single_bleat').length;
+		var max_length = 16;
+		$('.single_bleat').hide();
+		$('.single_bleat').slice(0,max_length).show();
+		var num_page = length/max_length;
+		var iter=0;
+		while (iter < num_page){
+			console.log("HI!");
+			$('#bleat_page').append("<button style='border:0' class='page'>"+(iter+1)+"</button>");
+			iter=iter + 1;
+		}
+		$(".page").on('click',function(){
+			var max_length = 16;
+			var page_num = $(this).text();
+			$('.single_bleat').hide();
+			console.log((page_num-1) * max_length);
+			$('.single_bleat').slice((page_num-1) * max_length,
+				page_num * max_length).show();
+		});
+	});
+</script>

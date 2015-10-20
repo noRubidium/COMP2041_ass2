@@ -1,0 +1,24 @@
+<script>
+	$(document).ready(function(){
+		var length = $('.single_user').length;
+		var max_length = 16;
+		$('.single_user').hide();
+		$('.single_user').slice(0,max_length).show();
+		var num_page = length/max_length;
+		var iter=0;
+		while (iter < num_page){
+			console.log("HI!");
+			$('#user_page').append("<button style='border:0' class='page'>"+(iter+1)+"</button>");
+			iter=iter + 1;
+		}
+		$(".page").on('click',function(){
+			var max_length = 16;
+			var page_num = $(this).text();
+			$('.single_user').hide();
+			console.log((page_num-1) * max_length);
+			$('.single_user').slice((page_num-1) * max_length,
+				page_num * max_length).show();
+		});
+		$("img").addClass("img-responsive");
+	});
+</script>
