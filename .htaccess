@@ -1,3 +1,4 @@
-<Files ~ "\.(cgi|pl|py|sh)$">#SetHandler application/x-setuid-cgid
+<Files ~ "\.(cgi|pl|py|sh)$">
+#SetHandler application/x-setuid-cgid
 </Files>
 

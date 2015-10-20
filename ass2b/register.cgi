@@ -20,7 +20,6 @@ if 'action' in form.keys():
 else:
 	action = ""
 if action == "register":
-	print "HI"
 	username=form["username"].value
 	if Search.search_user_by_ID_e(username).exist:
 		print "<h2>The user name already exists!!!!</h2>"

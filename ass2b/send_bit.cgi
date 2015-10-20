@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import cgi, cgitb
 import Cookie,os
-import Html
+import Html,re
 import Search,login_validate
 import special_char_filter
 import sqlite3
@@ -33,14 +33,32 @@ try:
 				longitude = form["longitude"].value
 			except:
 				longitude = ""
+			# naming principle of the picture: username+"_"+timestamp+"_"+pic_No+.whatever
+			video = ""
 			import datetime
 			dt = (datetime.datetime.now()-datetime.datetime(1970,1,1))
 			time = dt.days * 1440*60 + dt.seconds
+			pic_list = list()
+			if "myPic" in form.keys():
+				fileitems = form["myPic"]
+				i=0
+				for fileitem in fileitems:
+					print "UPLOADED"
+					if fileitem.filename:
+			   			# strip leading path from file name to avoid directory traversal attacks
+			   			file_type = re.sub(r'^.*(\.[^\.]*)$',r'\1',fileitem.filename)
+						fn = os.path.basename(username+"_"+str(time)+"_"+str(i)+file_type)
+						pic_path = 'bleat_img/'+fn
+						open(pic_path, 'w').write(fileitem.file.read())
+						pic_list.append(pic_path)
+						i+=1
+			picture = ", ".join(pic_list)
+			print picture
 			#Update the bleats database
 			conn = sqlite3.connect('database/Bleats.db')
 			c = conn.cursor()
-			data = (username,content,in_reply_to,time,longitude,latitude,"")
-			c.execute( '''INSERT INTO bleats VALUES(null,?,?,?,?,?,?,?)''',data)
+			data = (username,content,in_reply_to,time,longitude,latitude,"",picture,video)
+			c.execute( '''INSERT INTO bleats VALUES(null,?,?,?,?,?,?,?,?,?)''',data)
 			operation="SELECT bleatID FROM bleats WHERE username = ? AND bleat = ? AND time = ?;"
 			conn.commit()
 			selection=(username,content,time)
@@ -72,10 +90,10 @@ try:
 				{2} replied your bleat: {0}
 				Saying that:
 				{3}
-				""".format(bleat_r.content,email,bleat.author,bleat.content)
+				""".format(bleat_r.content,email,author,content)
 				smtpObj.sendmail(sender, receivers, message)
 			
-			for mentioned in re.findall(r'@\w+',bleat.content):
+			for mentioned in re.findall(r'@\w+',content):
 				user = Search.search_user_by_ID_e(mentioned)
 				if user.exist:
 					email = user.email
@@ -85,7 +103,7 @@ try:
 					Subject: {2} Mentioned you
 				
 					{2} mentioned you in the bleat: {0}
-					""".format(bleat.content,email,bleat.author)
+					""".format(content,email,author)
 					smtpObj.sendmail(sender, receivers, message)
 			smtpObj.quit()
 		else:
