@@ -135,7 +135,7 @@ class Bleat(Location):
 	def print_attachment(self):
 		string = ""
 		for pic in self.pics:
-			if not pic.pic_path == "":
+			if os.path.isfile(pic.pic_path):
 				string += "<div class='col-xs-2'>"+pic.pic_responsive()+"</div>\n"
 		if os.path.isfile(self.video):
 			string += "<div class='col-xs-2'>"+'''<video width="320" height="240" controls>

@@ -13,7 +13,7 @@ def search(database,table,field,value,is_partial = False,order_by = default_str 
 		operation="SELECT * FROM {0} WHERE {1} LIKE '{2}'"
 	c.execute(operation.format(table,field,value))
 	w=c.fetchall()
-	
+	conn.close()
 	return w	
 
 def search_bleat_by_bleat_ID(value):

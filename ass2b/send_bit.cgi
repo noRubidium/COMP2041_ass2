@@ -42,6 +42,8 @@ try:
 			if "myPic" in form.keys():
 				fileitems = form["myPic"]
 				i=0
+				if not isinstance(fileitems,list):
+					fileitems = [fileitems]
 				for fileitem in fileitems:
 					print "UPLOADED"
 					if fileitem.filename:
@@ -53,14 +55,14 @@ try:
 						pic_list.append(pic_path)
 						i+=1
 			picture = ", ".join(pic_list)
-			print picture
 			#Update the bleats database
 			conn = sqlite3.connect('database/Bleats.db')
 			c = conn.cursor()
 			data = (username,content,in_reply_to,time,longitude,latitude,"",picture,video)
 			c.execute( '''INSERT INTO bleats VALUES(null,?,?,?,?,?,?,?,?,?)''',data)
-			operation="SELECT bleatID FROM bleats WHERE username = ? AND bleat = ? AND time = ?;"
+			
 			conn.commit()
+			operation="SELECT bleatID FROM bleats WHERE username = ? AND bleat = ? AND time = ?;"
 			selection=(username,content,time)
 			c.execute(operation,selection)
 			bleatID = str(c.fetchone()[0])
@@ -90,7 +92,7 @@ try:
 				{2} replied your bleat: {0}
 				Saying that:
 				{3}
-				""".format(bleat_r.content,email,author,content)
+				""".format(bleat_r.content,email,username,content)
 				smtpObj.sendmail(sender, receivers, message)
 			
 			for mentioned in re.findall(r'@\w+',content):
@@ -103,7 +105,7 @@ try:
 					Subject: {2} Mentioned you
 				
 					{2} mentioned you in the bleat: {0}
-					""".format(content,email,author)
+					""".format(content,email,username)
 					smtpObj.sendmail(sender, receivers, message)
 			smtpObj.quit()
 		else:
