@@ -1,15 +1,38 @@
-<div class="list-group">
-	<div class="list-group-item container">
-		<div class="col-sm-4">%%longitude%%</div>
-		<div class="col-sm-4">%%latitude%%</div>
-		<div class="col-sm-4" align="right">%%in_reply_to%%</div>
-	</div>
-	<div class="list-group-item container">
-	%%bleat%%
-	</div>
-	<div class="list-group-item container">
+<div class="single_bleat">
+	<!--This is for a single bleat displayed in preview form-->
+	<div class="list-group" >
+		<div class="list-group-item container">
+			<div class="col-sm-12" style="font-size:1.2em;margin-bottom:1em;">{2}</div>
+			<div class="col-xs-12">{6}</div>
+			<div class="col-sm-1">{0}</div>
+			<div class="col-sm-1" align="right">
+				{1}
+			</div>
+			<div class="col-sm-3">{3}</div>
 
-		<div class="col-sm-5">%%username%%</div>
-		<div class="col-sm-7"><small>%%time%%</small></div>
+			<div class="col-sm-4" align="right">
+				<h6><small>{4}</small></h6>
+			</div>
+			<div class="col-xs-1">
+				<button class="btn reply_button"><span class="glyphicon glyphicon-share-alt"></span></button>
+				<input type="hidden" value="{5}">
+			</div>
+			<form  method="post" action="full_bleat.cgi">
+			<div class="col-xs-1">
+				
+					<input type="hidden" name="bleat_No" value="{5}">
+					<button class="btn delete_bleat" name="action" value="full_display">
+						<span class="glyphicon glyphicon-zoom-in"></span>
+					</button>
+			</div>
+			<div class="col-xs-1">
+					<button class="btn delete_bleat" name="action" value="delete">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+			</div>
+			</form>
+		</div>
+	</div>
+	<div class="list-group">
 	</div>
 </div>
