@@ -25,3 +25,6 @@ if "bleats_recursive" in form.keys():
 elif "username" in form.keys():
 	user = Search.search_user_by_ID_e(form["username"].value)
 	print json.dumps(vars(user))
+elif "notification" in form.keys():
+	notification = Search.search_notification_by_username(form["notification"].value)
+	print json.dumps(vars(notification))

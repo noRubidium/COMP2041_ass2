@@ -50,7 +50,9 @@ try:
 						import re;
 						operation="UPDATE users SET bleats='{1}' WHERE username= '{0}' ".format(username,re.sub(str(bleat_No),"",w[0]))
 						c.execute(operation,)
+						
 						conn.commit()
+						c.close()
 						conn.close()
 						# Delete from bleats list
 						conn = sqlite3.connect('database/Bleats.db', timeout=10)
@@ -58,6 +60,7 @@ try:
 						operation = "DELETE FROM bleats where bleatID = {0}".format(bleat_No)
 						c.execute(operation)
 						conn.commit()
+						c.close()
 						conn.close()
 						print "<h2>The bleat has been deleted successfully</h2>"
 				else:

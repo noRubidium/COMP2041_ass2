@@ -14,6 +14,7 @@ def search(database,table,field,value,is_partial = False,order_by = default_str 
 		operation="SELECT * FROM {0} WHERE {1} LIKE '{2}'"
 	c.execute(operation.format(table,field,value))
 	w=c.fetchall()
+	c.close()
 	conn.close()
 	return w	
 
@@ -160,7 +161,7 @@ def search_notification_by_username(value):
 		for i in range(0,len(u)):
 			w.append(re.sub(r'^"\s*','',str(u[i])))
 			w[i] = re.sub(r'"\s*$','',w[i])
-		user = Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10],w[11],w[12])
+		notify = Html.Notification(value,w[1],w[2])
 	else:
-		user = Html.User(is_exist = False)
-	return user
+		notify = Html.Notification(value)
+	return notify

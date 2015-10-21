@@ -217,6 +217,7 @@ class User(Location,Picture):
 		values=(self.UID, self.username, self.full_name, self.email,listens, self.password,
 			self.longitude,self.latitude,self.suburb,self.pic_path,bleats,self.status,self.is_suspended)
 		c.execute(operation,values)
+		c.close()
 		conn.commit()
 		conn.close()
 	def user_info(self):
@@ -274,15 +275,39 @@ class User(Location,Picture):
 			#temporary for user not found
 			return ""
 class Notification:
-	def __init__(self,username=default_str,listens=default_str,mentioned=default_str,exist = True):
+	def __init__(self,username=default_str,listens=default_str,mentioned=default_str):
 		self.username = username
-		self.listens = ", ".split(listens)
-		bleats = ", ".split(mentioned)
-		self.mentioned  = list()
+		self.listens = listens.split(",")
+		bleats = mentioned.split(",")
+		self.mentioned  = bleats
+	def update(self):
+		conn=sqlite3.connect("database/User.db", timeout=10)
+		c = conn.cursor()
+		bleat_list = self.mentioned
+		
+		bleats = ",".join(bleat_list)
+		listens = ",".join(self.listens)
+		operation = "INSERT OR REPLACE INTO Notification VALUES(?,?,?)"
+		values=(self.username,listens,bleats)
+		c.execute(operation,values)
+		conn.commit()
+		c.close()
+		conn.close()
+	def add_listen(self,username):
+		self.listens.append(username)
+	def add_mentioned(self,bleat_No):
 		import Search
-		for bleat in bleats:
-			self.mentioned.append(vars(Search.search_bleat_by_bleat_ID(bleat)))
-	
+		self.mentioned.append(bleat_No)
+	def del_listen(self,username):
+		try:
+			self.listens.remove(username)
+		except:
+			pass
+	def del_mentioned(self,bleat_No):
+		try:
+			self.listens.remove(bleat_No)
+		except:
+			pass
 
 # html templates
 class header:

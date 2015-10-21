@@ -72,13 +72,15 @@ try:
 				c = conn.cursor()
 				c.execute(operation,(username,))
 				conn.commit()
-				conn.close
+				c.close()
+				conn.close()
 				conn = sqlite3.connect("database/Bleats.db")
 				c = conn.cursor()
 				for bleat in user.bleats:
 					operation = "DELETE FROM bleats WHERE bleatID= ?;"
 					c.execute(operation,(bleat,))
 				conn.commit()
+				c.close()
 				conn.close()
 				cookie["logged_in"] = 0
 				print

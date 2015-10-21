@@ -122,6 +122,9 @@ else:
 			user.update()
 			print_string = print_string + Html.nav_bar_display(me)
 			print_string = print_string + user.user_display()
+			mentioned = Search.search_notification_by_username(username)
+			mentioned.add_listen(me)
+			mentioned.update()
 		
 		# Display the main page of the user ( including the bleat from people he is listening to)
 		elif action == "main":

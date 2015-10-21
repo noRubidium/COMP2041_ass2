@@ -38,6 +38,7 @@ if 'key' in form.keys():
 		operation = '''DELETE FROM tmp_user WHERE key =?'''
 		c.execute(operation,(user.UID,))
 		conn.commit()
+		c.close()
 		conn.close()
 		print Html.login_page_display()
 	else:

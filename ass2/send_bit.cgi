@@ -45,7 +45,6 @@ try:
 				if not isinstance(fileitems,list):
 					fileitems = [fileitems]
 				for fileitem in fileitems:
-					print "UPLOADED"
 					if fileitem.filename:
 			   			# strip leading path from file name to avoid directory traversal attacks
 			   			file_type = re.sub(r'^.*(\.[^\.]*)$',r'\1',fileitem.filename)
@@ -62,6 +61,7 @@ try:
 			c.execute( '''INSERT INTO bleats VALUES(null,?,?,?,?,?,?,?,?,?)''',data)
 			
 			conn.commit()
+			c.close()
 			conn.close()
 			conn = sqlite3.connect('database/Bleats.db')
 			c = conn.cursor()
@@ -69,6 +69,7 @@ try:
 			selection=(username,content,time)
 			c.execute(operation,selection)
 			bleatID = str(c.fetchone()[0])
+			c.close()
 			conn.close()
 			# Update the user database
 			user = Search.search_user_by_ID_e(username)
@@ -97,7 +98,11 @@ try:
 				{3}
 				""".format(bleat_r.content,email,username,content)
 				smtpObj.sendmail(sender, receivers, message)
-			
+				
+				#update the mentioned by
+				mentioned = Search.search_notification_by_username(user.username)
+				mentioned.add_listen(username)
+				mentioned.update()
 			for mentioned in re.findall(r'@\w+',content):
 				user = Search.search_user_by_ID_e(mentioned)
 				if user.exist:
@@ -110,6 +115,9 @@ try:
 					{2} mentioned you in the bleat: {0}
 					""".format(content,email,username)
 					smtpObj.sendmail(sender, receivers, message)
+					mentioned = Search.search_notification_by_username(user.username)
+					mentioned.add_listen(username)
+					mentioned.update()
 			smtpObj.quit()
 		else:
 			#print the default empty send bit page

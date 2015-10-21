@@ -68,6 +68,7 @@ if action == "register":
 		operation = '''INSERT INTO tmp_user values(?,?,?,?,?,?,?,?,?,?,?,?,0);'''
 		c.execute(operation,sets)
 		conn.commit()
+		c.close()
 		conn.close()
 
 		# generate the coresponding key link

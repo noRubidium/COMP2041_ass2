@@ -36,6 +36,7 @@ if action == "send_email":
 			setting = (key,email,user.password)
 			c.execute(operation,setting)
 			conn.commit()
+			c.close()
 			conn.close()
 			address = os.environ["SCRIPT_URI"]
 			link = address+"?action=verify&key="+key
@@ -83,6 +84,7 @@ elif action == "verify":
 		print "<h2>Your password is: "+w[2]+" </h2>"
 		c.execute("DELETE FROM forgot_password WHERE key = ?;",(key,))
 		conn.commit()
+		c.close()
 		conn.close()
 		print "<h2><a href='bitter.cgi'>Back to front page </a></h2>"
 	except:
