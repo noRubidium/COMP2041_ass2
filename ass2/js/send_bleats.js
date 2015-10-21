@@ -45,16 +45,12 @@ var MarkdownEditor = React.createClass({
 	        }.bind(this);
 
 	        reader[i].readAsDataURL(file[i]);
-			console.log(this.state.data_uri);
         }
         
     },
 	render: function() {
 	  	var img=[];
-		console.log("HI");
-		console.log(this.state.data_uri.length);
 		for(var i=0; i< this.state.data_uri.length;i++){
-			console.log("HI");
 			img.push(<div 
 					className="col-xs-2">
 					<img 

@@ -35,8 +35,9 @@
           </div>
           <button type="submit" class="btn btn-default" name="action" value="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
-        <div class="navbar-form navbar-right" id="notification"></div>
+        
         <ul class="nav navbar-nav navbar-right">
+          <li id="notification" style="margin-top:1em;cursor:pointer;"></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -83,48 +84,123 @@
       getInitialState: function() {{
         return {{
           username: '',
-          lastGistUrl: ''
+          listens: '',
+          mentioned: '',
         }};
       }},
 
       componentDidMount: function() {{
         $.get(this.props.source, function(result) {{
-          console.log(result);
-          var lastGist = result;
-      console.log(lastGist);
+          var notification = result;
           if (this.isMounted()) {{
       this.setState({{
-        username: lastGist.username,
-        lastGistUrl: lastGist.listens
+        username: notification.username,
+        listens: notification.listens,
+        mentioned: notification.mentioned
       }});
           }}
         }}.bind(this));
       }},
       componentDidUpdate: function() {{
         $.get(this.props.source, function(result) {{
-          console.log(result);
-          var lastGist = result;
-      console.log(lastGist);
+          var notification = result;
           if (this.isMounted()) {{
       this.setState({{
-        username: lastGist.username,
-        lastGistUrl: lastGist.listens
+        username: notification.username,
+        listens: notification.listens,
+        mentioned: notification.mentioned
       }});
           }}
         }}.bind(this));
       }},
+      l_toggle: function(){{
+      	$("#l_notice").toggle();
+      }},
+      m_toggle: function(){{
+      	$("#m_notice").toggle();
+      }},
       render: function() {{
+      	var listens = [];
+      	var mentioned = [];
+      	var l_notify = false;
+      	var m_notify = false;
+      	// Find the start listen notice
+      	for(var i = 0; i < this.state.listens.length;i++){{
+      		if(this.state.listens[i]){{
+      			var link = "bitter.cgi?action=User_name&del_notice=true&username=" + this.state.listens[i];
+      			listens.push(
+      			<a
+      				href={{link}}>
+	      			<li 
+	      				className="list-group-item">
+	      				{{this.state.listens[i]}} has just started listening to you.
+	      			</li>
+      			</a>);
+      			l_notify = true;
+      		}}
+      	}}
+      	// Find the mentioned by notice
+      	for(var i = 0; i < this.state.mentioned.length;i++){{
+      		if(this.state.mentioned[i]){{
+      			var link = "full_bleay.cgi?action=full_display&bleat_No="+ this.state.mentioned[i];
+      			mentioned.push(
+      			<li
+      				className="list-group-item">
+      				<a 
+      				  href={{link}}>
+      					 Someone has just mentioned you in the bleat.Check it out.
+      				</a>
+      			</li>);
+      			m_notify = true;
+      		}}
+      	}}
         return (
-          <div>
-      {{this.state.username}}'s last gist is
-      <a >{{this.state.lastGistUrl}} here</a>.
-          </div>
+        	<div>
+		{{ l_notify
+			? <div 
+				onMouseEnter={{this.l_toggle}}
+				onMouseLeave={{this.l_toggle}}
+				className="notification_menu">
+				<span 
+					className = "glyphicon glyphicon-bell" 
+					>
+				</span>
+				<ul 
+					id="l_notice" 
+					className="list-group dd_menu"
+					hidden>
+					{{listens}}
+				</ul>
+			</div>
+			: <ul></ul>}}
+		{{ m_notify
+			? <div 
+				onMouseEnter={{this.m_toggle}}
+				onMouseLeave={{this.m_toggle}}
+				className="notification_menu">
+				<span 
+					className = "glyphicon glyphicon-bell" >
+				</span>
+				<ul 
+					id="m_notice" 
+					className="list-group dd_menu"
+					hidden>
+					{{mentioned}}
+				</ul>
+			</div>
+			: <ul></ul>}}
+		</div>
         );
       }}
     }});
 
      ReactDOM.render(
-      <UserGist source="http://cgi.cse.unsw.edu.au/~z5041652/ass2/json_response.cgi?username={0}" />,
+      <UserGist source="http://cgi.cse.unsw.edu.au/~z5041652/ass2/json_response.cgi?notification={0}" />,
       mountNode
     );
      </script>
+     <style>
+     	.dd_menu {{
+     		position:absolute;
+     	}}
+     </style>
