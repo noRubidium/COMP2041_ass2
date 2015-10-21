@@ -72,9 +72,10 @@ else:
 		action = form['action'].value
 		# View a specific user
 		if action == "User_name":
+			me = cookie["username"].value
 			username = form['username'].value
 			user = Search.search_user_by_ID_e(username)
-			print_string = print_string + Html.nav_bar_display(username)
+			print_string = print_string + Html.nav_bar_display(me)
 			print_string = print_string + user.user_display()
 		# Unlisten a user
 		elif action == "un_listen":
@@ -86,7 +87,7 @@ else:
 			except:
 				pass
 			user.update()
-			print_string = print_string + Html.nav_bar_display(username)
+			print_string = print_string + Html.nav_bar_display(me)
 			print_string = print_string + user.user_display()
 		# Start listening to a user
 		elif action == "listen":
@@ -119,7 +120,7 @@ else:
 			except:
 				pass
 			user.update()
-			print_string = print_string + Html.nav_bar_display(username)
+			print_string = print_string + Html.nav_bar_display(me)
 			print_string = print_string + user.user_display()
 		
 		# Display the main page of the user ( including the bleat from people he is listening to)

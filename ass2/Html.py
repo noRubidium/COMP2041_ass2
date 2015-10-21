@@ -273,6 +273,16 @@ class User(Location,Picture):
 		except:
 			#temporary for user not found
 			return ""
+class Notification:
+	def __init__(self,username=default_str,listens=default_str,mentioned=default_str,exist = True):
+		self.username = username
+		self.listens = ", ".split(listens)
+		bleats = ", ".split(mentioned)
+		self.mentioned  = list()
+		import Search
+		for bleat in bleats:
+			self.mentioned.append(vars(Search.search_bleat_by_bleat_ID(bleat)))
+	
 
 # html templates
 class header:
@@ -304,13 +314,8 @@ def login_page_display(empty=False,not_exist=False,wrong=False):
 
 def nav_bar_display(username):
 	string = open(base+"navbar.html",'r').read()
-	return string.format(my_account_menu(username,0))
+	return string.format(username)
 
-def my_account_menu(username,password):
-	return '''<li><a href="change_bg.cgi">Change Background</a></li>
-		<li><a href="settings.cgi">Dashboard</a></li>
-            <li><a href="Logout.cgi" action="Logout">Logout</a></li>'''
-      
 def register_page():
 	string = open(base+"register.html").read()
 	return string

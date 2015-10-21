@@ -35,11 +35,14 @@
           </div>
           <button type="submit" class="btn btn-default" name="action" value="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
+        <div class="navbar-form navbar-right" id="notification"></div>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              {0}
+                <li><a href="change_bg.cgi">Change Background</a></li>
+    <li><a href="settings.cgi">Dashboard</a></li>
+              <li><a href="Logout.cgi" action="Logout">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -61,13 +64,67 @@
           </div>
           <p/>
           <div class="row">
-		  <form method="post" encType="multipart/form-data" action="send_bit.cgi">
-		    <div id='myDiv' style="margin:2em">
-		    </div>
-		    <input name="in_reply_to" id="in_reply_to" type="hidden" value=""/><!--This is for in reply to-->
-		  </form>
-		  <script type="text/babel" src="js/send_bleats.js">    </script>
-	 </div>
+      <form method="post" encType="multipart/form-data" action="send_bit.cgi">
+        <div id='myDiv' style="margin:2em">
+        </div>
+        <input name="in_reply_to" id="in_reply_to" type="hidden" value=""/><!--This is for in reply to-->
+      </form>
+      <script type="text/babel" src="js/send_bleats.js">    </script>
+   </div>
         </div>
     </div>
   </div>
+  <script type="text/babel" src="js/notification.js">
+
+   </script>
+   <script type="text/babel">
+    var mountNode = document.getElementById('notification')
+    var UserGist = React.createClass({{
+      getInitialState: function() {{
+        return {{
+          username: '',
+          lastGistUrl: ''
+        }};
+      }},
+
+      componentDidMount: function() {{
+        $.get(this.props.source, function(result) {{
+          console.log(result);
+          var lastGist = result;
+      console.log(lastGist);
+          if (this.isMounted()) {{
+      this.setState({{
+        username: lastGist.username,
+        lastGistUrl: lastGist.listens
+      }});
+          }}
+        }}.bind(this));
+      }},
+      componentDidUpdate: function() {{
+        $.get(this.props.source, function(result) {{
+          console.log(result);
+          var lastGist = result;
+      console.log(lastGist);
+          if (this.isMounted()) {{
+      this.setState({{
+        username: lastGist.username,
+        lastGistUrl: lastGist.listens
+      }});
+          }}
+        }}.bind(this));
+      }},
+      render: function() {{
+        return (
+          <div>
+      {{this.state.username}}'s last gist is
+      <a >{{this.state.lastGistUrl}} here</a>.
+          </div>
+        );
+      }}
+    }});
+
+     ReactDOM.render(
+      <UserGist source="http://cgi.cse.unsw.edu.au/~z5041652/ass2/json_response.cgi?username={0}" />,
+      mountNode
+    );
+     </script>

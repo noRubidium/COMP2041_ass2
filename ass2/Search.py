@@ -147,3 +147,20 @@ def search_tmp_user_by_key(value):
 	else:
 		user = Html.User(is_exist = False)
 	return user
+
+#search the user's notification
+def search_notification_by_username(value):
+	db_filename = "database/User.db"
+	table = "Notification"
+	field = "username"
+	w=list()
+	l = search(db_filename,table,field,value)
+	if len(l) > 0:
+		u=l[0]
+		for i in range(0,len(u)):
+			w.append(re.sub(r'^"\s*','',str(u[i])))
+			w[i] = re.sub(r'"\s*$','',w[i])
+		user = Html.User(w[0],w[1],w[2],w[3],w[4],w[5],w[6],w[7],w[8],w[9],w[10],w[11],w[12])
+	else:
+		user = Html.User(is_exist = False)
+	return user
