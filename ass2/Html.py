@@ -84,7 +84,15 @@ class Location(object):
 		return open(base+"loc_long.html").read().format(self.suburb,"Suburb: ")
 	def print_loc(self):
 		return self.get_long()+self.get_lat() +self.get_sub()
-
+	def print_loc_api(self):
+		try:
+			center="center="+re(" ","%20")+"&"
+		except:
+			center = ""
+		if self.longitude == "" or self.latitude == "":
+			return ""
+		else:
+			return "<img src='https://maps.googleapis.com/maps/api/staticmap?"+center+"zoom=13&size=600x300&maptype=roadmap&markers=color:red%7Clabel:G%7C"+self.latitude+","+self.longitude+"&visual_refresh=true' class='img-responsive'>"+'<img src="http://maps.googleapis.com/maps/api/staticmap?center=Albany,+NY&zoom=13&scale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CAlbany,+NY&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CAlbany,+NY" alt="Google Map of Albany, NY" hidden>'
 # Picture class can be used to store the user's photo location 
 # and may print the photo in a nicely formated 
 class Picture(object):
@@ -221,7 +229,7 @@ class User(Location,Picture):
 				bg = "background='"+bg_path+"'"
 			else:
 				bg=""
-			return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),username,self.print_loc(),self.full_name,self.status,bg)
+			return open(base+"info_panel.html").read().format(img(self.pic_path).__str__(),username,self.print_loc_api(),self.full_name,self.status,bg)
 		else:
 			return open(base+"info_panel.html").read().format(img("img/default.jpg").__str__(),"Unknown","Unknown","Unknown","")
 	def main_page(self):
