@@ -1,3 +1,9 @@
+commit 2af6ed2dc9a3a1893941993518f0447fffebdc6c
+Author: z5041652 <z5041652@cse.unsw.EDU.AU>
+Date:   Thu Oct 22 15:44:34 2015 +1100
+
+    Seemingly that I have found the problem with my busy database(missing semi-colomn)
+
 commit 4ba024ec69e83e9e6c28bf271d1c3aed4bea11fa
 Author: z5041652 <z5041652@cse.unsw.EDU.AU>
 Date:   Thu Oct 22 15:19:36 2015 +1100

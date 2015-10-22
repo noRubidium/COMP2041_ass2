@@ -7,7 +7,9 @@ import special_char_filter
 import sqlite3
 print "Content-Type: text/html"
 base = "html/"
-
+img_base = 'bleat_img/'
+default_str=""
+bleat_database = 'database/Bleats.db'
 try:
 	cookie = Cookie.SimpleCookie(os.environ["HTTP_COOKIE"])
 	form = cgi.FieldStorage()
@@ -24,45 +26,51 @@ try:
 			try:
 				in_reply_to = form["in_reply_to"].value
 			except:
-				in_reply_to = ""
+				in_reply_to = default_str
 			try:
 				latitude = form["latitude"].value
 			except:
-				latitude = ""
+				latitude = default_str
 			try:
 				longitude = form["longitude"].value
 			except:
-				longitude = ""
-			# naming principle of the picture: username+"_"+timestamp+"_"+pic_No+.whatever
-			video = ""
+				longitude = default_str
+			
+			video = default_str
+			# Get the time
 			import datetime
 			dt = (datetime.datetime.now()-datetime.datetime(1970,1,1))
 			time = dt.days * 1440*60 + dt.seconds
+			# Upload pic items
 			pic_list = list()
 			if "myPic" in form.keys():
 				fileitems = form["myPic"]
 				i=0
+				# Avoid fileitem to be only one or empty
 				if not isinstance(fileitems,list):
 					fileitems = [fileitems]
 				for fileitem in fileitems:
 					if fileitem.filename:
-			   			# strip leading path from file name to avoid directory traversal attacks
+			   			# naming principle of the picture: username+"_"+timestamp+"_"+pic_No+.whatever
 			   			file_type = re.sub(r'^.*(\.[^\.]*)$',r'\1',fileitem.filename)
-						fn = os.path.basename(username+"_"+str(time)+"_"+str(i)+file_type)
-						pic_path = 'bleat_img/'+fn
+			   			fn = username+"_"+str(time)+"_"+str(i)+file_type
+						pic_path = os.path.basename(img_base+fn)
 						open(pic_path, 'w').write(fileitem.file.read())
 						pic_list.append(pic_path)
 						i+=1
+						
 			picture = ", ".join(pic_list)
-			#Update the bleats database
-			conn = sqlite3.connect('database/Bleats.db')
+			# Update the bleats database
+			conn = sqlite3.connect(bleat_database)
 			c = conn.cursor()
-			data = (username,content,in_reply_to,time,longitude,latitude,"",picture,video)
-			c.execute( '''INSERT INTO bleats VALUES(null,?,?,?,?,?,?,?,?,?);''',data)
+			data = (username,content,in_reply_to,time,longitude,latitude,default_str,picture,video)
+			c.execute( 'INSERT INTO bleats VALUES(null,?,?,?,?,?,?,?,?,?);',data)
 			conn.commit()
 			c.close()
 			conn.close()
-			conn = sqlite3.connect('database/Bleats.db')
+			
+			# Get the bleatID
+			conn = sqlite3.connect(bleat_database)
 			c = conn.cursor()
 			operation="SELECT bleatID FROM bleats WHERE username = ? AND bleat = ? AND time = ?;"
 			selection=(username,content,time)
@@ -70,6 +78,8 @@ try:
 			bleatID = str(c.fetchone()[0])
 			c.close()
 			conn.close()
+			
+			# Print the user's page
 			user = Search.search_user_by_ID_e(username)
 			print user.user_display()
 			# Send email to related person
@@ -99,7 +109,7 @@ try:
 				mentioned.add_mentioned(bleatID)
 				mentioned.update()
 			for mentioned in re.findall(r'@\w+',content):
-				user = Search.search_user_by_ID_e(mentioned)
+				user = Search.search_user_by_ID_e(mentioned[1:])
 				if user.exist:
 					email = user.email
 					receivers = email
