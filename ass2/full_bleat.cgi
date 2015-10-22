@@ -36,8 +36,11 @@ try:
 						print open(base+"full_bleat.html").read().format(bleat.print_loc_row(),
 							bleat.print_reply(),bleat.format_content(),bleat.author,
 							bleat.time,bleat.bleat_No,string,replies,bleat.print_attachment())
-
 						print open(base+"style_bleat.html").read()
+						if "del_notice" in form.keys():
+							mentioned = Search.search_notification_by_username(username)
+							mentioned.del_mentioned(bleat_No)
+							mentioned.update()
 					elif action == "delete" and bleat.author == username:
 						import sqlite3
 						# Delete from user's bleat list

@@ -101,7 +101,7 @@ try:
 				
 				#update the mentioned by
 				mentioned = Search.search_notification_by_username(user.username)
-				mentioned.add_listen(username)
+				mentioned.add_mentioned(bleatID)
 				mentioned.update()
 			for mentioned in re.findall(r'@\w+',content):
 				user = Search.search_user_by_ID_e(mentioned)
@@ -116,7 +116,7 @@ try:
 					""".format(content,email,username)
 					smtpObj.sendmail(sender, receivers, message)
 					mentioned = Search.search_notification_by_username(user.username)
-					mentioned.add_listen(username)
+					mentioned.add_mentioned(bleatID)
 					mentioned.update()
 			smtpObj.quit()
 		else:

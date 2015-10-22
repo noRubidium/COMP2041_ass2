@@ -77,6 +77,11 @@ else:
 			user = Search.search_user_by_ID_e(username)
 			print_string = print_string + Html.nav_bar_display(me)
 			print_string = print_string + user.user_display()
+			# delete the notification to the user
+			if "del_notice" in form.keys():
+				mentioned = Search.search_notification_by_username(username)
+				mentioned.del_listen(me)
+				mentioned.update()
 		# Unlisten a user
 		elif action == "un_listen":
 			me = cookie["username"].value
