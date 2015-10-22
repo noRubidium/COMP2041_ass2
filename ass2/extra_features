@@ -1,3 +1,5 @@
 Find possibly know users
 Display recent bleat of the user when searching it
 Display the location of the user in googlemap
+Realtime notifigation (without refreshing the page)
+Geolocation pingpointing 

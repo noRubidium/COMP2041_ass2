@@ -182,7 +182,14 @@ class User(Location,Picture):
 			Picture.__init__(self,pic_dir)
 			self.exist = is_exist
 			self.status = status
-			self.bleats = [var for var in re.split(r',',bleats) if var]
+			import sqlite3
+			conn = sqlite3.connect('database/Bleats.db')
+			c = conn.cursor()
+			operation="SELECT bleatID FROM bleats WHERE username=?;"
+			c.execute(operation,(self.username,))
+			self.bleats = [bleat[0] for bleat in c.fetchall()]
+			c.close()
+			conn.close()
 			if is_suspended == '0':
 				self.is_suspended = False
 			else:
@@ -217,8 +224,9 @@ class User(Location,Picture):
 		values=(self.UID, self.username, self.full_name, self.email,listens, self.password,
 			self.longitude,self.latitude,self.suburb,self.pic_path,bleats,self.status,self.is_suspended)
 		c.execute(operation,values)
-		c.close()
+		
 		conn.commit()
+		c.close()
 		conn.close()
 	def user_info(self):
 		if self.exist:

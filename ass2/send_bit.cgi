@@ -71,11 +71,7 @@ try:
 			bleatID = str(c.fetchone()[0])
 			c.close()
 			conn.close()
-			# Update the user database
 			user = Search.search_user_by_ID_e(username)
-			user.add_bleats(bleatID)
-			user.update()
-			user.main_page()
 			print user.user_display()
 			# Send email to related person
 			import smtplib
