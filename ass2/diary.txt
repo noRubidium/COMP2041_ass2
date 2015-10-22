@@ -1,3 +1,9 @@
+commit 4ba024ec69e83e9e6c28bf271d1c3aed4bea11fa
+Author: z5041652 <z5041652@cse.unsw.EDU.AU>
+Date:   Thu Oct 22 15:19:36 2015 +1100
+
+    This has solved the infinite recommend problem
+
 commit 64e1cf61937611ec81b487c311a8b2d97037084f
 Author: z5041652 <z5041652@cse.unsw.EDU.AU>
 Date:   Thu Oct 22 14:51:26 2015 +1100

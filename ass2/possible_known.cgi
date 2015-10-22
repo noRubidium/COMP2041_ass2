@@ -17,7 +17,7 @@ try:
 			print
 			print Html.header("Bitter")	
 			print Html.nav_bar_display(username)	
-			recommend_list = user.listens[:]
+			recommend_list = list(user.listens)
 			recommend_list.append(username)
 			string = ""
 			print open(base+"page.html").read()

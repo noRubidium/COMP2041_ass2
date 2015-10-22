@@ -58,8 +58,7 @@ try:
 			conn = sqlite3.connect('database/Bleats.db')
 			c = conn.cursor()
 			data = (username,content,in_reply_to,time,longitude,latitude,"",picture,video)
-			c.execute( '''INSERT INTO bleats VALUES(null,?,?,?,?,?,?,?,?,?)''',data)
-			
+			c.execute( '''INSERT INTO bleats VALUES(null,?,?,?,?,?,?,?,?,?);''',data)
 			conn.commit()
 			c.close()
 			conn.close()

@@ -219,7 +219,7 @@ class User(Location,Picture):
 		conn=sqlite3.connect("database/User.db", timeout=10)
 		c = conn.cursor()
 		listens = " ".join(self.listens)
-		operation = "INSERT OR REPLACE INTO users VALUES(?,?,?,?,?,?,?,?,?,?,null,?,?)"
+		operation = "INSERT OR REPLACE INTO users VALUES(?,?,?,?,?,?,?,?,?,?,null,?,?);"
 		values=(self.UID, self.username, self.full_name, self.email,listens, self.password,
 			self.longitude,self.latitude,self.suburb,self.pic_path,self.status,self.is_suspended)
 		c.execute(operation,values)
@@ -294,7 +294,7 @@ class Notification:
 		
 		bleats = ",".join(bleat_list)
 		listens = ",".join(self.listens)
-		operation = "INSERT OR REPLACE INTO Notification VALUES(?,?,?)"
+		operation = "INSERT OR REPLACE INTO Notification VALUES(?,?,?);"
 		values=(self.username,listens,bleats)
 		c.execute(operation,values)
 		conn.commit()
