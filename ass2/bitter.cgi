@@ -76,7 +76,10 @@ else:
 			username = form['username'].value
 			user = Search.search_user_by_ID_e(username)
 			print_string = print_string + Html.nav_bar_display(me)
-			print_string = print_string + user.user_display()
+			if user.exist:
+				print_string = print_string + user.user_display()
+			else:
+				print_string = print_string + open("html/404.html").read()
 			# delete the notification to the user
 			if "del_notice" in form.keys():
 				mentioned = Search.search_notification_by_username(username)
