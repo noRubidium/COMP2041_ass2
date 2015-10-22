@@ -174,7 +174,7 @@ class User(Location,Picture):
 			self.username = username
 			self.full_name = full_name
 			self.email = email
-			self.listens = [var for var in re.split(r' ',listens) if var]
+			self.listens = [var for var in listens.split(' ') if var]
 			self.password = password
 			Location.__init__(self,longitude,latitude,suburb)
 			if pic_dir == "":

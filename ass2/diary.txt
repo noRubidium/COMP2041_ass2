@@ -1,3 +1,15 @@
+commit 64e1cf61937611ec81b487c311a8b2d97037084f
+Author: z5041652 <z5041652@cse.unsw.EDU.AU>
+Date:   Thu Oct 22 14:51:26 2015 +1100
+
+    Releaf the pressure of database in sosme sense
+
+commit f2618f78829f9ccf43d4566b1c4cb6d74cd135cc
+Author: z5041652 <z5041652@cse.unsw.EDU.AU>
+Date:   Thu Oct 22 14:45:50 2015 +1100
+
+    The implementation of get the bleats has been limited
+
 commit 1120a6bff30c22b5b5cf9499cd846bb63c577d3b
 Author: Minjie SHEN <z5041652@cse.unsw.EDU.AU>
 Date:   Thu Oct 22 12:28:36 2015 +1100
@@ -32,7 +44,7 @@ commit eb4644e8dbe597495a8ea16164f15016df04624d
 Author: z5041652 <z5041652@cse.unsw.EDU.AU>
 Date:   Wed Oct 21 15:02:19 2015 +1100
 
-    Notice for marker: SQLITE is fragile!! PLEASE BE EASY TO IT! DON't Make frequent change!!
+    Notice for marker: SQLITE is fragilegit add .! PLEASE BE EASY TO IT! DON't Make frequent changegit add .
 
 commit 5c7cd44c577fc2c03e15b4c4faeb7abf329a0ea9
 Author: Minjie SHEN <z5041652@cse.unsw.EDU.AU>
