@@ -218,11 +218,10 @@ class User(Location,Picture):
 	def update(self):
 		conn=sqlite3.connect("database/User.db", timeout=10)
 		c = conn.cursor()
-		bleats = ",".join(self.bleats)
 		listens = " ".join(self.listens)
-		operation = "INSERT OR REPLACE INTO users VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
+		operation = "INSERT OR REPLACE INTO users VALUES(?,?,?,?,?,?,?,?,?,?,null,?,?)"
 		values=(self.UID, self.username, self.full_name, self.email,listens, self.password,
-			self.longitude,self.latitude,self.suburb,self.pic_path,bleats,self.status,self.is_suspended)
+			self.longitude,self.latitude,self.suburb,self.pic_path,self.status,self.is_suspended)
 		c.execute(operation,values)
 		
 		conn.commit()
