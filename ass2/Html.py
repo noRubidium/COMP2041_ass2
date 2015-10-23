@@ -312,7 +312,7 @@ class Notification:
 			pass
 	def del_mentioned(self,bleat_No):
 		try:
-			self.listens.remove(bleat_No)
+			self.mentioned.remove(bleat_No)
 		except:
 			pass
 

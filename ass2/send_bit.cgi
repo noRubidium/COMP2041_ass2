@@ -54,7 +54,7 @@ try:
 			   			# naming principle of the picture: username+"_"+timestamp+"_"+pic_No+.whatever
 			   			file_type = re.sub(r'^.*(\.[^\.]*)$',r'\1',fileitem.filename)
 			   			fn = username+"_"+str(time)+"_"+str(i)+file_type
-						pic_path = os.path.basename(img_base+fn)
+						pic_path = img_base+os.path.basename(fn)
 						open(pic_path, 'w').write(fileitem.file.read())
 						pic_list.append(pic_path)
 						i+=1

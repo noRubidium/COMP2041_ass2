@@ -44,23 +44,23 @@ try:
 					elif action == "delete" and bleat.author == username:
 						import sqlite3
 						# Delete from user's bleat list
-						conn = sqlite3.connect('database/User.db', timeout=10)
-						c = conn.cursor()
-						print username
-						operation="SELECT bleats FROM users WHERE username = '{0}';".format(username)
-						c.execute(operation);
-						w = c.fetchone();
-						import re;
-						operation="UPDATE users SET bleats='{1}' WHERE username= '{0}' ".format(username,re.sub(str(bleat_No),"",w[0]))
-						c.execute(operation,)
+						# conn = sqlite3.connect('database/User.db', timeout=10)
+						# c = conn.cursor()
+						# print username
+						# operation="SELECT bleats FROM users WHERE username = '{0}';".format(username)
+						# c.execute(operation);
+						# w = c.fetchone();
+						# import re;
+						# operation="UPDATE users SET bleats='{1}' WHERE username= '{0}' ".format(username,re.sub(str(bleat_No),"",w[0]))
+						# c.execute(operation,)
 						
-						conn.commit()
-						c.close()
-						conn.close()
+						# conn.commit()
+						# c.close()
+						# conn.close()
 						# Delete from bleats list
 						conn = sqlite3.connect('database/Bleats.db', timeout=10)
 						c = conn.cursor()
-						operation = "DELETE FROM bleats where bleatID = {0}".format(bleat_No)
+						operation = "DELETE FROM bleats where bleatID = {0};".format(bleat_No)
 						c.execute(operation)
 						conn.commit()
 						c.close()
