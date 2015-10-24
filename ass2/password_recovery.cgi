@@ -33,7 +33,7 @@ if action == "send_email":
 			conn = sqlite3.connect("database/User.db", timeout=10)
 			c = conn.cursor()
 			operation = "INSERT INTO forgot_password VALUES(?,?,?);"
-			setting = (key,email,user.password)
+			setting = (key,email,user.username)
 			c.execute(operation,setting)
 			conn.commit()
 			c.close()
@@ -48,10 +48,11 @@ if action == "send_email":
 
 			message = """From: From Person <bitter.auto@bitter.com>
 			To:  <{1}>
-			Subject: Verify your registration
+			Subject: Recover your password
 
 			Click through this link : {0}
-			""".format(link,email)
+			your old password is {2}
+			""".format(link,email,user.password)
 
 			smtpObj = smtplib.SMTP('smtp.gmail.com:587')
 			smtpObj.starttls()
@@ -79,19 +80,48 @@ elif action == "verify":
 		conn = sqlite3.connect("database/User.db")
 		c = conn.cursor()
 		c.execute("SELECT * FROM forgot_password WHERE key = ?;",(key,))
-		
+		print "HI"
 		w = c.fetchone()
-		print "<h2>Your password is: "+w[2]+" </h2>"
-		c.execute("DELETE FROM forgot_password WHERE key = ?;",(key,))
-		conn.commit()
-		c.close()
-		conn.close()
-		print "<h2><a href='bitter.cgi'>Back to front page </a></h2>"
+		page = open(base+"change_password.html").read()
+		username = w[2]
+		print page.format(str(key),str(username))
 	except:
 		print '''<div class="col-xs-6 alert alert-warning alert-dismissible" style="z-index:5;position:absolute;top:50%;left:50%;margin:0 -25%" role="alert">
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				  <strong>Warning!</strong> The key is expired please try again.
 				</div>'''
+		print open(base+"password_recovery.html").read()
+elif action == "change_password":
+	try:
+		key=form['key'].value
+		username=form['username'].value
+		password= form['password'].value
+		conn = sqlite3.connect("database/User.db")
+		c = conn.cursor()
+		c.execute("SELECT * FROM forgot_password WHERE key = ?;",(key,))
+		w = c.fetchone()
+		if username == w[2]:
+			c.execute("DELETE FROM forgot_password WHERE key = ?;",(key,))
+			conn.commit()
+			c.close()
+			conn.close()
+			user = Search.search_user_by_ID_e(w[2])
+			user.password = password
+			user.update()
+			print Html.login_page_display()
+		else:
+			c.close()
+			conn.close()
+			print '''<div class="col-xs-6 alert alert-warning alert-dismissible" style="z-index:5;position:absolute;top:50%;left:50%;margin:0 -25%" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <strong>Warning!</strong> The key is expired please try again.
+				</div>'''
+			print open(base+"password_recovery.html").read()
+	except:
+		print '''<div class="col-xs-6 alert alert-warning alert-dismissible" style="z-index:5;position:absolute;top:50%;left:50%;margin:0 -25%" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <strong>Warning!</strong> The key is expired please try again.
+			</div>'''
 		print open(base+"password_recovery.html").read()
 # other cases
 else:

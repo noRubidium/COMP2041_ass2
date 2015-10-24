@@ -1,3 +1,15 @@
+commit c7de56fbbde121326d3119762a9c76345c4e6dff
+Author: Minjie SHEN <z5041652@cse.unsw.EDU.AU>
+Date:   Fri Oct 23 12:17:21 2015 +1100
+
+    This part I fixed the bug with mentioned by and delete bleat
+
+commit bcc591e8a1cacc571ac21c59e0b5eeb0b4ed474e
+Author: Minjie SHEN <z5041652@cse.unsw.EDU.AU>
+Date:   Fri Oct 23 10:05:08 2015 +1100
+
+    I have found the bug in mentioned by
+
 commit 2af6ed2dc9a3a1893941993518f0447fffebdc6c
 Author: z5041652 <z5041652@cse.unsw.EDU.AU>
 Date:   Thu Oct 22 15:44:34 2015 +1100

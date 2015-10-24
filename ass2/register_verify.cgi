@@ -7,7 +7,7 @@ print "Content-Type: text/html"
 print
 print
 form = cgi.FieldStorage()
-
+print Html.header("Bitter")
 if 'key' in form.keys():
 	key = form['key'].value
 	user = Search.search_tmp_user_by_key(key)
@@ -43,7 +43,14 @@ if 'key' in form.keys():
 		print Html.login_page_display()
 	else:
 
-		print "<h1> The key is expired or does not exist. </h1>"
+		print """<div class='row'>
+			<div class='col-xs-3' style='min-height:10em'></div>
+				<div class='col-xs-6' style='padding-top:10em'>
+					<h1 style='color:white;'> The key is expired or does not exist. </h1>
+					<h1 style='color:white;'><a href='bitter.cgi'> Back to main page.</a> </h1>
+				</div>
+			</div>
+		</div>"""
 else:
 	print Html.login_page_display()
 print Html.footer()
