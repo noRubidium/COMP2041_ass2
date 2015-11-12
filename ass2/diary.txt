@@ -1,3 +1,9 @@
+commit 6d1fd7a978891339207abccb57410619a66f1106
+Author: Minjie SHEN <z5041652@cse.unsw.EDU.AU>
+Date:   Sat Oct 24 13:58:48 2015 +1100
+
+    Fixed password changing
+
 commit c7de56fbbde121326d3119762a9c76345c4e6dff
 Author: Minjie SHEN <z5041652@cse.unsw.EDU.AU>
 Date:   Fri Oct 23 12:17:21 2015 +1100
